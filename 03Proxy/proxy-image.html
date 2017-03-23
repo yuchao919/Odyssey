@@ -1,0 +1,38 @@
+<!--虚拟代理图片预加载-->
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+</body>
+<script>
+    var myImage = (function () {
+        var imgNode = document.createElement('img');
+        document.body.appendChild(imgNode);
+
+        return {
+            setSrc: function (src) {
+                imgNode.src = src;
+            }
+        }
+    })();
+
+    var proxyImage = (function () {
+        var img = new Image;
+        img.onload = function () {
+            myImage.setSrc(this.src);
+        }
+        return {
+            setSrc: function (src) {
+                myImage.setSrc('/img/loading.gif');
+                img.src = src;
+            }
+        }
+    })();
+
+    proxyImage.setSrc('http://global.bing.com/az/hprichbg/rb/LamarStorm_EN-US8537269096_1920x1080.jpg');
+</script>
+
+</html>

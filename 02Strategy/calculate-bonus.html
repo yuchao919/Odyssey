@@ -1,0 +1,35 @@
+<html>
+
+<head>
+    <title>CalculateBonus</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    var strategies = {
+        "S": function (salary) {
+            return salary * 4;
+        },
+        "A": function (salary) {
+            return salary * 3;
+        },
+        "B": function (salary) {
+            return salary * 2;
+        }
+    };
+
+    var calculateBonus = function (level, salary) {
+        return strategies[level](salary);
+    }
+
+    var calculateBonusFunc = function (fn, salary) {
+        return fn(salary);
+    }
+
+    console.log(calculateBonus('S', 20000));
+    console.log(calculateBonusFunc(strategies.A, 10000));
+</script>
+
+</html>

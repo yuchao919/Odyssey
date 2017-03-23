@@ -1,0 +1,60 @@
+<html>
+
+<head>
+    <title>login</title>
+</head>
+
+<body>
+    <button type="" id="loginBtn">登陆</button>
+</body>
+<script>
+    var getSingle = function (fn) {
+        var result;
+        return function () {
+            return result || (result = fn.apply(this, arguments));
+        }
+    };
+
+    var createLoginLayer = function () {
+        var div = document.createElement('div');
+        div.innerHTML = '我是登陆浮窗';
+        div.style.display = 'none';
+        div.id = 'loginDiv';
+        document.body.appendChild(div);
+        return div;
+    }
+
+    var createSingleLoginLayer = getSingle(createLoginLayer);
+
+    document.getElementById('loginBtn').onclick = function () {
+        var loginLayer = createLoginLayer();
+        loginLayer.style.display = 'block';
+    }
+
+    var createSingleIframe = getSingle(function () {
+        var iframe = document.createElement('iframe');
+        document.body.appendChild(iframe);
+        return iframe;
+    });
+
+    var bindEvent = getSingle(function () {
+        document.getElementById('loginDiv').onclick = function () {
+            alert('click');
+        }
+        return true;
+    });
+
+    var render = function () {
+        console.log('开始渲染列表');
+        bindEvent();
+    }
+
+    // // var loginLayer = (function () {
+    // //     var div = document.createElement('div');
+    // //     div.innerHTML = "我是登陆框";
+    // //     div.style.display = 'none';
+    // //     return div;
+    // // })();
+</script>
+
+</html>
