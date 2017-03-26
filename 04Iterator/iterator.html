@@ -1,0 +1,64 @@
+<html>
+
+<head>
+    <title>Iterator</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    var each = function (ary, callback) {
+        for (var i = 0, l = ary.length; i < l; i++) {
+            callback.call(ary[i], i, ary[i]);
+        }
+    }
+
+    var innerCompare = function (ary1, ary2) {
+        if (ary1.length !== ary2.length) {
+            throw new Error('ary1和ary2不相等');
+        }
+        each(ary1, function (i, n) {
+            if (n !== ary2[i]) {
+                throw new Error('ary1和ary2不相等');
+            }
+        });
+        console.log('ary1和ary2相等');
+    }
+</script>
+
+<script>
+    var Iterator = function (obj) {
+        var current = 0;
+        var next = function () {
+            current += 1;
+        }
+
+        var isDone = function () {
+            return current >= obj.length;
+        }
+
+        var getCurrItem = function () {
+            return obj[current];
+        }
+
+        return {
+            next: next,
+            isDone: isDone,
+            getCurrItem: getCurrItem
+        }
+    }
+
+    var outerCompare = function (iterator1, iterator2) {
+        while (!iterator1.isDone() && !iterator2.isDone()) {
+            if (iterator1.getCurrItem() !== iterator2.getCurrItem()) {
+                throw new Error('iterator1和iterator2不相等');
+            }
+            iterator1.next();
+            iterator2.next();
+        }
+        alert('iterator1和iterator2相等');
+    }
+</script>
+
+</html>
