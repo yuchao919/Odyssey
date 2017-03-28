@@ -1,0 +1,93 @@
+<html>
+
+<head>
+    <title>Composite</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    /***Folder***/
+    var Folder = function (name) {
+        this.name = name;
+        this.parent = null;
+        this.files = [];
+    };
+
+    Folder.prototype.add = function (file) {
+        file.parent = this;
+        this.files.push(file);
+    };
+
+    Folder.prototype.scan = function () {
+        console.log('开始扫描文件夹: ' + this.name);
+        for (var i = 0, file, files = this.files; file = files[i++];) {
+            file.scan();
+        }
+    };
+
+    Folder.prototype.remove = function () {
+        if (!this.parent) { // 跟节点活着树外的游离节点
+            return;
+        }
+        for (var files = this.parent.files, l = files.length - 1; l > 0; l--) {
+            var file = files[l];
+            if (file === this) {
+                files.splice(l, 1);
+            }
+        }
+    }
+    /***File***/
+    var File = function (name) {
+        this.name = name;
+        this.parent = null;
+    };
+
+    File.prototype.add = function (file) {
+        throw new Error('不能添加在文件下面')
+    };
+
+    File.prototype.scan = function () {
+        console.log('开始扫描文件: ' + this.name);
+    };
+
+    File.prototype.remove = function () {
+        if (!this.parent) { // 跟节点活着树外的游离节点
+            return;
+        }
+        for (var files = this.parent.files, l = files.length - 1; l > 0; l--) {
+            var file = files[l];
+            if (file === this) {
+                files.splice(l, 1);
+            }
+        }
+    }
+
+    /***Client***/
+    var folder = new Folder('学习资料');
+
+    var file1 = new File('深入浅出Node.js');
+    var file2 = new File('C# in Deepth');
+
+    var folder1 = new Folder('JavaScript');
+    folder1.add(new File('JavaScript设计模式与开发实践'));
+    folder.add(file1);
+    
+    var folder2 = new Folder('C#');
+    folder2.add(new File('CLR via C#'));
+    folder2.add(file2);
+    
+
+    folder.add(folder1);
+    folder.add(folder2);
+
+
+    folder1.remove();    //移除文件夹
+    // folder2.remove();
+    file2.remove();
+    folder.scan();
+
+</script>
+
+</html>
