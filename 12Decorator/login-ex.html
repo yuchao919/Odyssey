@@ -1,0 +1,34 @@
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <button tag="login" id="button">点击打开登陆浮层</button>
+</body>
+<script>
+    var showLogin = function (str) {
+        console.log('打开登陆浮层: ' + str);
+    }
+
+    var log = function (a) {
+        console.log(a + ' 上报标签为：' + this.getAttribute('tag'));
+    }
+
+    Function.prototype.after = function (afterFn) {
+        var __self = this;
+        return function () {
+            var ret = __self.apply(this, arguments);
+            afterFn.apply(this, arguments);
+            return ret;
+        }
+    }
+
+    document.getElementById('button').onclick = function () {
+        var fn = showLogin.after(log);
+        fn.call(this, 'hello');
+    }
+</script>
+
+</html>
