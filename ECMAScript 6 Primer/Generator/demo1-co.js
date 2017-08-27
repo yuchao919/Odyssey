@@ -1,12 +1,13 @@
 function run(generator, res) {
   const ret = generator.next(res);
   if (ret.done) return;
-  ret.value.then(function(res) {
+  ret.value.then(function (res) {
     run(generator, res);
   });
 }
 
 let count = 1;
+
 function tick(time) {
   return new Promise(resolve => {
     setTimeout(() => {
@@ -15,6 +16,7 @@ function tick(time) {
     }, time);
   });
 }
+
 function* main() {
   console.log('start run...');
   yield tick(500);
