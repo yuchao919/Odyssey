@@ -1,12 +1,13 @@
-var obj = { a: 'a' };
+var obj = {a: 'a'};
 
-Object.freeze(obj);
+console.log(obj === Object.freeze(obj)); // true
+
 obj.a = 'b';
 console.log(obj.a); // a
 
 function fail1() {
   'use strict';
-  var o2 = { a: 'a' };
+  var o2 = {a: 'a'};
   Object.freeze(o2);
 
   o2.a = 'b'; // throws a TypeErrors
