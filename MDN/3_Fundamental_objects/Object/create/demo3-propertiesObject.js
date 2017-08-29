@@ -50,7 +50,7 @@ function Constructor() {
     {},
     {
       p: {
-        value: 42,
+        value: 42
         // enumerable: true
       }
     }

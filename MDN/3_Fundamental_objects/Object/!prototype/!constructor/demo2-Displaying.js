@@ -3,4 +3,7 @@ function Tree(name) {
 }
 
 var theTree = new Tree('Redwood');
+
+console.log(theTree.constructor === Tree); // true
+
 console.log('theTree.constructor is ' + theTree.constructor);
