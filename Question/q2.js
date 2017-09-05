@@ -24,15 +24,25 @@ function add(x) {
 } 
 */
 
+function add(x) {
+  var y = function(x) {
+    return add(x + y);
+  };
+  y.toString = y.valueOf = function() {
+    return x;
+  };
+  return y;
+}
+/* 
 function add(n) {
   add.V = add.V ? add.V + n : n;
-  return arguments.callee;
+  // return arguments.callee;
+  return add;
 }
 add.toString = add.valueOf = function() {
   return add.V;
-};
+}; */
 
 var ans = add(1)(2)(3)(3); // 9
 console.log(ans);
-
-// 感觉不是很规范啊，起码在node 显示
+// 感觉不是很规范啊，起码在node显示不出来想要的结果
