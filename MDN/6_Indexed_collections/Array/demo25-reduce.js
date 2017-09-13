@@ -15,3 +15,17 @@
 // third call     11              222             2               [0, 1, 2, 3, 4]     443
 // fourth call    13              333             3               [0, 1, 2, 3, 4]     776
 // fifth call     16              444             4               [0, 1, 2, 3, 4]     1220
+
+
+var result = [
+  100,
+  111,
+  222,
+  333,
+  444
+].reduce((accumulator, currentValue, currentIndex, array) => {
+  console.log(`${accumulator}\t\t${currentValue}\t\t${currentIndex}\t\t${array}\t\t${accumulator+currentValue}`);
+  return accumulator + currentValue;
+});
+
+console.log(result);
