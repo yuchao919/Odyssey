@@ -22,7 +22,10 @@ var objArr = [
   new Map(), // [object Map]
   new Map().entries(), // [object Map Iterator]
   new Map().keys(), // [object Map Iterator]
-  new Set() // [object Set]
+  new Set(), // [object Set]
+  new Promise((resolve, reject) => {}), // [object Promise]
+  function*() {}, // [object GeneratorFunction]
+  (function*() {})() // [object Generator]
 ].forEach(obj => {
   console.log(Object.prototype.toString.call(obj));
 });
