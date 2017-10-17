@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>jQuery Validate 插件 - 折叠面板表单验证</title>
+
+  <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
+  <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+  <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+
+  <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/demo/marketo/jquery.maskedinput.js"></script>
+  <script src="https://code.jquery.com/ui/1.10.2/jquery-ui.min.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+
+      $("#recordClientPhone").mask("(999) 999-9999");
+      $("#recordClientPhoneAlt").mask("(999) 999-9999");
+      $("#recordClientZip").mask("99999");
+      $("#recordPropertyZip").mask("99999");
+      $("#recordPurchaseZip").mask("99999");
+
+      // 添加 * 到必填字段的标签
+      $('label.required').append('&nbsp;<strong>*</strong>&nbsp;');
+
+      // 折叠面板功能
+      var accordion = $("#stepForm").accordion();
+      var current = 0;
+
+      $.validator.addMethod("pageRequired", function (value, element) {
+        var $element = $(element)
+
+        function match(index) {
+          return current == index && $(element).parents("#sf" + (index + 1)).length;
+        }
+        if (match(0) || match(1) || match(2)) {
+          return !this.optional(element);
+        }
+        return "dependency-mismatch";
+      }, $.validator.messages.required)
+
+      var v = $("#cmaForm").validate({
+        errorClass: "warning",
+        onkeyup: false,
+        onblur: false,
+        submitHandler: function () {
+          alert("Submitted, thanks!");
+        }
+      });
+
+      // 返回按钮不需要运行验证
+      $("#sf2 .prevbutton").click(function () {
+        accordion.accordion("option", "active", 0);
+        current = 0;
+      });
+      $("#sf3 .prevbutton").click(function () {
+        accordion.accordion("option", "active", 1);
+        current = 1;
+      });
+      // 所有通过上面指定的目标重载的按钮都要运行验证
+      $(".open2").click(function () {
+        if (v.form()) {
+          accordion.accordion("option", "active", 2);
+          current = 2;
+        }
+      });
+      $(".open1").click(function () {
+        if (v.form()) {
+          accordion.accordion("option", "active", 1);
+          current = 1;
+        }
+      });
+      $(".open0").click(function () {
+        if (v.form()) {
+          accordion.accordion("option", "active", 0);
+          current = 0;
+        }
+      });
+
+    });
+  </script>
+  <style type="text/css">
+    .warning {
+      color: red;
+    }
+  </style>
+  <link rel="stylesheet" type="text/css" media="screen" href="http://static.runoob.com/assets/jquery-validation-1.14.0/demo/multipart/style.css"
+  />
+</head>
+
+<body>
+
+  <div id="wrap">
+    <div id="main">
+
+      <h1 class="top bottom">
+        <span>帮我</span>买卖房屋</h1>
+      <h2>该表单只需要 3 步即可快速完成！</h2>
+      <form name="cmaForm" id="cmaForm" method="post">
+        <input type="hidden" name="recordRequestPrimaryServiceID" id="recordRequestPrimaryServiceID" value="100" />
+        <input type="hidden" name="recordClientServices" id="recordClientServices" value="1,3" />
+        <ul id="stepForm" class="ui-accordion-container">
+          <li id="sf1">
+            <a href='#' class="ui-accordion-link"> </a>
+            <div>
+              <fieldset>
+                <legend>第 1 步（共 3 步）</legend>
+                <div class="requiredNotice">*必填字段</div>
+                <h3 class="stepHeader">告诉我们您想要购买的房屋的一些特征</h3>
+                <label for="recordPurchaseMetRealtor" class="input required">您目前是一个房地产经纪人吗？</label> &nbsp;&nbsp;否：
+                <input name="recordPurchaseMetRealtor" type="radio" checked="checked" class="inputclass" value="0" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;是：
+                <input name="recordPurchaseMetRealtor" type="radio" class="inputclass pageRequired" value="1" title="请选择是或否" />
+                <div class="formspacer"></div>
+                <label for="recordPurchaseTimeFrameID" class="input required">您打算何时搬迁？</label>
+                <select name="recordPurchaseTimeFrameID" id="recordPurchaseTimeFrameID" class="inputclass pageRequired" title="请选择一个时间段">
+                  <option value="">-请选择-</option>
+                  <option value="1">少于 3 个月</option>
+                  <option value="2">3-6 个月</option>
+                  <option value="3">6-9 个月</option>
+                  <option value="4">9-12 个月</option>
+                  <option value="5">多于 12 个月</option>
+                </select>
+                <br />
+                <label for="recordPurchasePriceRangeID" class="input required">购买价格范围：</label>
+                <select name="recordPurchasePriceRangeID" id="recordPurchasePriceRangeID" class="inputclass pageRequired" title="请选择一个价格范围">
+                  <option value="">-请选择-</option>
+                  <option value="1"></option>
+                  <option value="2">$75,000 - $100,000</option>
+                  <option value="3">$100,000 - $125,000</option>
+                  <option value="4">$125,000 - $150,000</option>
+                  <option value="5">$150,000 - $200,000</option>
+                  <option value="6">$200,000 - $250,000</option>
+                  <option value="7">$250,000 - $300,000</option>
+                  <option value="8">$300,000 - $350,000</option>
+                  <option value="9">$350,000 - $400,000</option>
+                  <option value="10">$400,000 - $500,000</option>
+                  <option value="11">$500,000 - $700,000</option>
+                  <option value="12">$700,000 - $900,000</option>
+                  <option value="13">> $900,000</option>
+                </select>
+                <br />
+                <label for="recordPurchaseState" class="input required">州：</label>
+                <select name="recordPurchaseState" id="recordPurchaseState" class="inputclass pageRequired" title="请选择一个州">
+                  <option value="">-请选择-</option>
+                  <option value="AL">Alabama</option>
+                  <option value="AK">Alaska</option>
+                  <option value="AZ">Arizona</option>
+                  <option value="AR">Arkansas</option>
+                  <option value="CA">California</option>
+                  <option value="CO">Colorado</option>
+                  <option value="CT">Connecticut</option>
+                  <option value="DE">Delaware</option>
+                  <option value="DC">Dist of Columbia</option>
+                  <option value="FL">Florida</option>
+                  <option value="GA">Georgia</option>
+                  <option value="HI">Hawaii</option>
+                  <option value="ID">Idaho</option>
+                  <option value="IL">Illinois</option>
+                  <option value="IN">Indiana</option>
+                  <option value="IA">Iowa</option>
+                  <option value="KS">Kansas</option>
+                  <option value="KY">Kentucky</option>
+                  <option value="LA">Louisiana</option>
+                  <option value="ME">Maine</option>
+                  <option value="MD">Maryland</option>
+                  <option value="MA">Massachusetts</option>
+                  <option value="MI">Michigan</option>
+                  <option value="MN">Minnesota</option>
+                  <option value="MS">Mississippi</option>
+                  <option value="MO">Missouri</option>
+                  <option value="MT">Montana</option>
+                  <option value="NE">Nebraska</option>
+                  <option value="NV">Nevada</option>
+                  <option value="NH">New Hampshire</option>
+                  <option value="NJ">New Jersey</option>
+                  <option value="NM">New Mexico</option>
+                  <option value="NY">New York</option>
+                  <option value="NC">North Carolina</option>
+                  <option value="ND">North Dakota</option>
+                  <option value="OH">Ohio</option>
+                  <option value="OK">Oklahoma</option>
+                  <option value="OR">Oregon</option>
+                  <option value="PA" selected="selected">Pennsylvania</option>
+                  <option value="RI">Rhode Island</option>
+                  <option value="SC">South Carolina</option>
+                  <option value="SD">South Dakota</option>
+                  <option value="TN">Tennessee</option>
+                  <option value="TX">Texas</option>
+                  <option value="UT">Utah</option>
+                  <option value="VT">Vermont</option>
+                  <option value="VA">Virginia</option>
+                  <option value="WA">Washington</option>
+                  <option value="WV">West Virginia</option>
+                  <option value="WI">Wisconsin</option>
+                  <option value="WY">Wyoming</option>
+                </select>
+                <br />
+
+                <label for="recordPurchasePropertyTypeID" class="input">所需的房屋类型：</label>
+                <select name="recordPurchasePropertyTypeID" id="recordPurchasePropertyTypeID" class="inputclass" title="请选择一个类型">
+                  <option value="">-请选择-</option>
+                  <option value="1">单户型</option>
+                  <option value="2">公寓</option>
+                  <option value="3">联排别墅</option>
+                  <option value="4">出租房</option>
+                  <option value="5">多户型</option>
+                  <option value="6">度假屋</option>
+                  <option value="7">其他</option>
+                </select>
+                <br />
+                <div class="buttonWrapper">
+                  <input name="formNext1" type="button" class="open1 nextbutton" value="下一步" alt="下一步" title="下一步" />
+                </div>
+              </fieldset>
+            </div>
+          </li>
+          <li id="sf2">
+            <a href='#' class="ui-accordion-link">
+            </a>
+            <div>
+              <fieldset>
+                <legend>第 2 步（共 3 步）</legend>
+                <div class="requiredNotice">*必填字段</div>
+                <h3 class="stepHeader">告诉我们您想要出售的房屋的一些特征</h3>
+                <label for="recordClientTimeFrameID" class="input required">您打算何时出售？</label>
+                <select name="recordClientTimeFrameID" id="recordClientTimeFrameID" class="inputclass pageRequired" title="请选择一个时间段">
+                  <option value="">-请选择-</option>
+                  <option value="1">少于 3 个月</option>
+                  <option value="2">3-6 个月</option>
+                  <option value="3">6-9 个月</option>
+                  <option value="4">9-12 个月</option>
+                  <option value="5">多于 12 个月</option>
+                </select>
+                <br />
+                <label for="recordClientHomeTypeID" class="input required">所卖的房屋类型：</label>
+                <select name="recordClientHomeTypeID" id="recordClientHomeTypeID" class="inputclass pageRequired" title="请选择一个类型">
+                  <option value="">-请选择-</option>
+                  <option value="1">单户型</option>
+                  <option value="2">公寓</option>
+                  <option value="3">联排别墅</option>
+                  <option value="4">出租房</option>
+                  <option value="5">多户型</option>
+                  <option value="6">度假屋</option>
+                  <option value="7">其他</option>
+                </select>
+                <br />
+                <label for="recordPropertyAddress1" class="input required">物业地址：</label>
+                <input name="recordPropertyAddress1" id="recordPropertyAddress1" class="inputclass pageRequired" title="物业地址是必填的" maxlength="254"
+                  onblur="recordClientAddress1.value = this.value" />
+                <br />
+                <label for="recordPropertyAddress2" class="input">地址（2）：</label>
+                <input name="recordPropertyAddress2" id="recordPropertyAddress2" class="inputclass" maxlength="254" onblur="recordClientAddress2.value = this.value"
+                />
+                <br />
+                <label for="recordPropertyCity" class="input required">城市：</label>
+                <input name="recordPropertyCity" id="recordPropertyCity" class="inputclass pageRequired" title="城市是必填的" maxlength="254" onblur="recordClientCity.value = this.value"
+                />
+                <br />
+                <label for="recordPropertyState" class="input required">州：</label>
+                <select name="recordPropertyState" id="recordPropertyState" class="inputclass pageRequired" title="请选择一个州" onchange="recordClientState.value = this.value">
+                  <option value="">-请选择-</option>
+                  <option value="AL">Alabama</option>
+                  <option value="AK">Alaska</option>
+                  <option value="AZ">Arizona</option>
+                  <option value="AR">Arkansas</option>
+                  <option value="CA">California</option>
+                  <option value="CO">Colorado</option>
+                  <option value="CT">Connecticut</option>
+                  <option value="DE">Delaware</option>
+                  <option value="DC">Dist of Columbia</option>
+                  <option value="FL">Florida</option>
+                  <option value="GA">Georgia</option>
+                  <option value="HI">Hawaii</option>
+                  <option value="ID">Idaho</option>
+                  <option value="IL">Illinois</option>
+                  <option value="IN">Indiana</option>
+                  <option value="IA">Iowa</option>
+                  <option value="KS">Kansas</option>
+                  <option value="KY">Kentucky</option>
+                  <option value="LA">Louisiana</option>
+                  <option value="ME">Maine</option>
+                  <option value="MD">Maryland</option>
+                  <option value="MA">Massachusetts</option>
+                  <option value="MI">Michigan</option>
+                  <option value="MN">Minnesota</option>
+                  <option value="MS">Mississippi</option>
+                  <option value="MO">Missouri</option>
+                  <option value="MT">Montana</option>
+                  <option value="NE">Nebraska</option>
+                  <option value="NV">Nevada</option>
+                  <option value="NH">New Hampshire</option>
+                  <option value="NJ">New Jersey</option>
+                  <option value="NM">New Mexico</option>
+                  <option value="NY">New York</option>
+                  <option value="NC">North Carolina</option>
+                  <option value="ND">North Dakota</option>
+                  <option value="OH">Ohio</option>
+                  <option value="OK">Oklahoma</option>
+                  <option value="OR">Oregon</option>
+                  <option value="PA" selected="selected">Pennsylvania</option>
+                  <option value="RI">Rhode Island</option>
+                  <option value="SC">South Carolina</option>
+                  <option value="SD">South Dakota</option>
+                  <option value="TN">Tennessee</option>
+                  <option value="TX">Texas</option>
+                  <option value="UT">Utah</option>
+                  <option value="VT">Vermont</option>
+                  <option value="VA">Virginia</option>
+                  <option value="WA">Washington</option>
+                  <option value="WV">West Virginia</option>
+                  <option value="WI">Wisconsin</option>
+                  <option value="WY">Wyoming</option>
+                </select>
+                <br />
+                <label for="recordPropertyZip" class="input required">邮编：</label>
+                <input name="recordPropertyZip" id="recordPropertyZip" class="inputclass pageRequired" title="Zip Code is required" maxlength="254"
+                  onblur="recordClientZip.value = this.value" />
+                <br />
+
+                <label for="recordClientPropertyValueID" class="input required">估计市场价值：</label>
+                <select name="recordClientPropertyValueID" id="recordClientPropertyValueID" class="inputclass pageRequired" title="请选择一个价格范围">
+                  <option value="">-请选择-</option>
+                  <option value="1">少于 $75K</option>
+                  <option value="2">$75-$100K</option>
+                  <option value="3">$100-$125K</option>
+                  <option value="4">$125-$150K</option>
+                  <option value="5">$150-$200K</option>
+                  <option value="6">$200-$250K</option>
+                  <option value="7">$250-$300K</option>
+                  <option value="8">$300-$350K</option>
+                  <option value="9">$350-$400K</option>
+                  <option value="10">$400-$500K</option>
+                  <option value="11">$500-$700K</option>
+                  <option value="12">$700-$900K</option>
+                  <option value="13">多于 $900K</option>
+                </select>
+                <br />
+                <label for="recordPropertyBedroomsID" class="input">卧室：</label>
+                <select name="recordPropertyBedroomsID" id="recordPropertyBedroomsID" class="inputclass">
+                  <option value="">-请选择-</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5+</option>
+                </select>
+                <br />
+                <label for="recordPropertyBathroomsId" class="input">浴室：</label>
+                <select name="recordPropertyBathroomsId" id="recordPropertyBathroomsId" class="inputclass">
+                  <option value="">-请选择-</option>
+                  <option value="1">1</option>
+                  <option value="2">1.5</option>
+                  <option value="3">2</option>
+                  <option value="4">2.5</option>
+                  <option value="5">3</option>
+                  <option value="6">3.5</option>
+                  <option value="7">4+</option>
+                </select>
+                <br />
+                <label for="recordPropertyAgeId" class="input">房屋的大约年龄：</label>
+                <select name="recordPropertyAgeId" id="recordPropertyAgeId" class="inputclass">
+                  <option value="">-请选择-</option>
+                  <option value="1">少于 1 年</option>
+                  <option value="2">1-5 年</option>
+                  <option value="3">6-10 年</option>
+                  <option value="4">11-15 年</option>
+                  <option value="5">多于 15 年</option>
+                </select>
+                <br />
+                <label for="recordPropertySqFt" class="input">大约平方英尺：</label>
+                <input name="recordPropertySqFt" id="recordPropertySqFt" class="inputclass" maxlength="254" />
+                <br />
+                <div class="buttonWrapper">
+                  <input name="formBack0" type="button" class="open0 prevbutton" value="返回" alt="返回" title="返回" />
+                  <input name="formNext2" type="button" class="open2 nextbutton" value="下一步" alt="下一步" title="下一步" />
+                </div>
+              </fieldset>
+            </div>
+          </li>
+          <li id="sf3">
+            <a href='#' class="ui-accordion-link">
+            </a>
+            <div>
+              <fieldset>
+                <legend>第 3 步（共 3 步）</legend>
+                <div class="requiredNotice">*必填字段</div>
+                <h3 class="stepHeader">告诉我们有关您的信息</h3>
+                <label for="recordClientNameFirst" class="input required">名字：</label>
+                <input name="recordClientNameFirst" id="recordClientNameFirst" class="inputclass pageRequired" title="名字是必填的" maxlength="254"
+                />
+                <br />
+                <label for="recordClientNameLast" class="input required">姓氏：</label>
+                <input name="recordClientNameLast" id="recordClientNameLast" class="inputclass pageRequired" maxlength="254" title="姓氏是必填的"
+                />
+                <br />
+                <label for="recordClientAddress1" class="input required">目前地址：</label>
+                <input name="recordClientAddress1" id="recordClientAddress1" class="inputclass pageRequired" maxlength="254" title="地址是必填的"
+                />
+                <br />
+                <label for="recordClientAddress2" class="input">地址（2）：</label>
+                <input name="recordClientAddress2" id="recordClientAddress2" class="inputclass" maxlength="254" />
+                <br />
+                <label for="recordClientCity" class="input required">城市：</label>
+                <input name="recordClientCity" id="recordClientCity" class="inputclass pageRequired" maxlength="254" title="城市是必填的" />
+                <br />
+                <label for="recordClientState" class="input required">州：</label>
+                <select name="recordClientState" id="recordClientState" class="inputclass pageRequired" title="请选择一个州">
+                  <option value="">-请选择-</option>
+                  <option value="AL">Alabama</option>
+                  <option value="AK">Alaska</option>
+                  <option value="AZ">Arizona</option>
+                  <option value="AR">Arkansas</option>
+                  <option value="CA">California</option>
+                  <option value="CO">Colorado</option>
+                  <option value="CT">Connecticut</option>
+                  <option value="DE">Delaware</option>
+                  <option value="DC">Dist of Columbia</option>
+                  <option value="FL">Florida</option>
+                  <option value="GA">Georgia</option>
+                  <option value="HI">Hawaii</option>
+                  <option value="ID">Idaho</option>
+                  <option value="IL">Illinois</option>
+                  <option value="IN">Indiana</option>
+                  <option value="IA">Iowa</option>
+                  <option value="KS">Kansas</option>
+                  <option value="KY">Kentucky</option>
+                  <option value="LA">Louisiana</option>
+                  <option value="ME">Maine</option>
+                  <option value="MD">Maryland</option>
+                  <option value="MA">Massachusetts</option>
+                  <option value="MI">Michigan</option>
+                  <option value="MN">Minnesota</option>
+                  <option value="MS">Mississippi</option>
+                  <option value="MO">Missouri</option>
+                  <option value="MT">Montana</option>
+                  <option value="NE">Nebraska</option>
+                  <option value="NV">Nevada</option>
+                  <option value="NH">New Hampshire</option>
+                  <option value="NJ">New Jersey</option>
+                  <option value="NM">New Mexico</option>
+                  <option value="NY">New York</option>
+                  <option value="NC">North Carolina</option>
+                  <option value="ND">North Dakota</option>
+                  <option value="OH">Ohio</option>
+                  <option value="OK">Oklahoma</option>
+                  <option value="OR">Oregon</option>
+                  <option value="PA" selected="selected">Pennsylvania</option>
+                  <option value="RI">Rhode Island</option>
+                  <option value="SC">South Carolina</option>
+                  <option value="SD">South Dakota</option>
+                  <option value="TN">Tennessee</option>
+                  <option value="TX">Texas</option>
+                  <option value="UT">Utah</option>
+                  <option value="VT">Vermont</option>
+                  <option value="VA">Virginia</option>
+                  <option value="WA">Washington</option>
+                  <option value="WV">West Virginia</option>
+                  <option value="WI">Wisconsin</option>
+                  <option value="WY">Wyoming</option>
+                </select>
+                <br />
+                <label for="recordClientZip" class="input required">邮编：</label>
+                <input name="recordClientZip" id="recordClientZip" class="inputclass pageRequired" maxlength="12" title="邮政编码是必填的" />
+                <br />
+                <label for="recordClientPhone" class="input required">电话号码：</label>
+                <input name="recordClientPhone" id="recordClientPhone" class="inputclass pageRequired" maxlength="254" title="电话号码是必填的" />
+                <br />
+                <label for="recordClientPhoneAlt" class="input">备用号码：</label>
+                <input name="recordClientPhoneAlt" id="recordClientPhoneAlt" class="inputclass" maxlength="254" />
+                <br />
+                <label for="recordClientEmail" class="input required">Email 地址：</label>
+                <input name="recordClientEmail" id="recordClientEmail" class="inputclass pageRequired email" maxlength="254" title="Email 地址是必填的"
+                />
+                <br />
+                <label for="recordClientEmail1" class="input required">确认 Email：</label>
+                <input name="recordClientEmail1" id="recordClientEmail1" class="inputclass pageRequired" equalTo: "'#recordClientEmail" maxlength="254"
+                  title="请确认您的 email 地址" />
+                <br />
+                <br />
+                <p class="formDisclaimer">这是一个示例表单，信息不会被发送到任何地方。</p>
+                <div class="buttonWrapper">
+                  <input name="formBack1" type="button" class="open1 prevbutton" value="返回" alt="返回" title="返回" />
+                  <input name="submit" type="submit" id="submit" value="提交" class="submitbutton" alt="提交" title="提交">
+                </div>
+              </fieldset>
+            </div>
+          </li>
+        </ul>
+      </form>
+
+    </div>
+  </div>
+
+</body>
+
+</html>

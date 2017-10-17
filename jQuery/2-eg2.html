@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title></title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src='./jquery-1.11.1.js'></script>
+  <script>
+    $(function () {
+      var obj = {
+        name: "John",
+        test: function () {
+          alert(this.name);
+          $("#test").unbind("click", obj.test);
+        }
+      };
+
+      $("#test").click(jQuery.proxy(obj, "test"));
+
+      // 以下代码跟上面那句是等价的:
+      // $("#test").click( jQuery.proxy( obj.test, obj ) );
+
+      // 可以与单独执行下面这句做个比较。
+      // $("#test").click( obj.test );
+    })
+  </script>
+</head>
+
+<body>
+  <button id='test'>Click Me!</button>
+</body>
+
+</html>
