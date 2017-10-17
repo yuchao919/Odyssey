@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>jQuery Validate 插件 - 自定义消息作为元素数据</title>
+
+  <link rel="stylesheet" media="screen" href="./lib/jQuery-validate/demo/css/screen.css" />
+  <script src="./lib/jquery/jquery-1.12.4.min.js"></script>
+  <script src="./lib/jQuery-validate/1.16.0/jquery.validate.min.js"></script>
+  <script src="./lib/jQuery-validate/messages_zh.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $("#commentForm").validate();
+      $("#commentForm2").validate({
+        messages: {
+          email: {
+            required: '请输入！'
+          }
+        }
+      });
+
+    });
+  </script>
+
+  <style type="text/css">
+    form {
+      width: 500px;
+    }
+
+    form label {
+      width: 250px;
+    }
+
+    form label.error,
+    form input.submit {
+      margin-left: 253px;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div id="main">
+
+    <p>本实例演示了如何通过元数据自定义消息。</p>
+
+    <!-- 通过 data- 属性自定义规则和消息 -->
+    <form class="cmxform" id="commentForm" method="post" action="">
+      <fieldset>
+        <legend>请输入您的电子邮件地址</legend>
+        <p>
+
+          <label for="cemail">E-Mail *</label>
+          <input id="cemail" name="email" data-rule-required="true" data-rule-email="true" data-msg-required="请输入您的电子邮件地址" data-msg-email="请输入一个有效的电子邮件地址"
+          />
+        </p>
+        <p>
+          <input class="submit" type="submit" value="提交" />
+        </p>
+      </fieldset>
+    </form>
+
+    <!-- 自定义通过 validate 选项重载的元数据中 "required" 的消息 -->
+    <form class="cmxform" id="commentForm2" method="post" action="">
+      <fieldset>
+        <legend>请输入您的电子邮件地址</legend>
+        <p>
+
+          <label for="cemail">E-Mail *</label>
+          <input id="cemail" name="email" data-rule-required="true" data-rule-email="true" data-msg-email="请输入一个有效的电子邮件地址" />
+        </p>
+        <p>
+          <input class="submit" type="submit" value="提交" />
+        </p>
+      </fieldset>
+    </form>
+
+</body>
+
+</html>
