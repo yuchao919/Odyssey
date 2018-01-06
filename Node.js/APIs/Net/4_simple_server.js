@@ -4,9 +4,6 @@ const fs = require('fs');
 
 const server = new net.Server();
 
-let address = server.address();
-console.log(address);
-
 /**
  * Sever events
  * 'close' 事件
@@ -22,7 +19,6 @@ console.log(address);
  */
 
 const bufArr = [];
-const fw = fs.createWriteStream(`${__filename}/../bbb.gif`);
 
 const ServerEventNames = ['close', 'connection', 'error', 'listening'];
 
@@ -53,6 +49,8 @@ server.on('connection', socket => {
    * close
    */
   // const bufArr = new Uint8Array(12726241);
+
+  let fw = fs.createWriteStream(`${__dirname}/bbb.gif`);
 
   socket.on('connect', err => {
     // 在这里没有监听到这个函数，说明该事件发生到监听之前
@@ -111,8 +109,8 @@ server.on('error', err => {
 
 server.listen(
   {
-    port: 8089,
-    host: 'localhost'
+    port: 23333,
+    host: '192.168.1.100'
   },
   () => {
     console.log('begin listening');
