@@ -10,16 +10,23 @@ const net = require('net');
  * Event: 'error'
  * Event: 'lookup'
  * Event: 'timeout'
-*/
+ */
 
 /**
  * data
  * end
  * close
  */
-const SocketEventNames = ['close', 'connect', 'data', 'drain', 'end', 'error', 'lookup', 'timeout'];
-
-
+const SocketEventNames = [
+  'close',
+  'connect',
+  'data',
+  'drain',
+  'end',
+  'error',
+  'lookup',
+  'timeout'
+];
 
 /**
  * Sever events
@@ -52,16 +59,18 @@ const ServerEventNames = ['close', 'connection', 'error', 'listening'];
 
 const server = new net.Server();
 
-for (const na of ServerEventNames) {
-  server.on(na, () => {
-    console.log(`ServerEvent: ${na}`);
-  });
-}
+console.log(server.listening);
 
-server.listen(8089, () => {
-  console.log('Begin Listening');
-});
+// for (const na of ServerEventNames) {
+//   server.on(na, () => {
+//     console.log(`ServerEvent: ${na}`);
+//   });
+// }
 
-setTimeout(() => {
-  server.close();
-}, 2e4);
+// server.listen(8089, () => {
+//   console.log('Begin Listening');
+// });
+
+// setTimeout(() => {
+//   server.close();
+// }, 2e4);
