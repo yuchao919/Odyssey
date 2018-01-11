@@ -110,7 +110,7 @@ server.on('error', err => {
 server.listen(
   {
     port: 23333,
-    host: '192.168.1.100'
+    // host: '192.168.1.100'
   },
   () => {
     console.log('begin listening');
