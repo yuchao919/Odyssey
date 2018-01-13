@@ -11,6 +11,7 @@ const p2 = new Promise((resolve, reject) => {
   .then(result => result)
   .catch(e => {
     console.log('p2: ' + e);
+    // return Promise.resolve('world');
   });
 
 Promise.all([p1, p2])
@@ -24,3 +25,8 @@ Promise.all([p1, p2])
   })
   .catch(e => console.log('all: ' + e));
 // ["hello", Error: 报错了]
+
+// p2: Error: 报错了
+// hello
+// undefined
+

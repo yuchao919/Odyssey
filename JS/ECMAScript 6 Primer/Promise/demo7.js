@@ -12,9 +12,9 @@ new Promise((resolve, reject) => {
 // 1
 
 new Promise((resolve, reject) => {
-  return resolve(1);
+  return resolve(11);
   // 后面的语句不会执行
-  console.log(2);
+  console.log(22);
 })
   .then(r => {
     console.log(r);
