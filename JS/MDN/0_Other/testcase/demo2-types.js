@@ -25,7 +25,9 @@ var objArr = [
   new Set(), // [object Set]
   new Promise((resolve, reject) => {}), // [object Promise]
   function*() {}, // [object GeneratorFunction]
-  (function*() {})() // [object Generator]
+  (function*() {})(), // [object Generator]
+  async function f() {}, // [object AsyncFunction]
+  (async function f() {})() // [object Promise]
 ].forEach(obj => {
   console.log(Object.prototype.toString.call(obj));
 });

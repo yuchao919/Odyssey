@@ -46,3 +46,4 @@ add.toString = add.valueOf = function() {
 var ans = add(1)(2)(3)(3); // 9
 console.log(ans);
 // 感觉不是很规范啊，起码在node显示不出来想要的结果
+

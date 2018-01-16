@@ -59,8 +59,11 @@ socket.on('connect', err => {
   // 调用connect方法触发该事件
   console.log(`${sno++}.Socket.connect`);
 
-  let data = fs.readFileSync(`${__dirname}/aaa.gif`);
-  console.log(socket instanceof stream.Duplex);
+  // let gifData = fs.readFileSync(`${__dirname}/aaa.gif`);
+  let strData = 'hello world';
+
+  let data = strData;
+  // console.log(socket instanceof stream.Duplex);
   // console.log(data.length); // 12726241字节
   socket.write(data, () => {
     console.log('write done');
@@ -118,7 +121,7 @@ socket.on('lookup', err => {
 // });
 
 socket.connect({
-  port: 23333,
+  port: 6000,
   // host: '192.168.1.100',
   localhost: '127.0.0.1',
   localPort: 8090

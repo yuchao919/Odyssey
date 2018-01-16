@@ -1,4 +1,5 @@
-function wrapper(generatorFunction) {
+// 如果想要第一次调用next方法时，就能够输入值，可以在 Generator 函数外面再包一层。
+function wrapper(generatorFunction, args) {
   return function(...args) {
     let generatorObject = generatorFunction(...args);
     generatorObject.next();

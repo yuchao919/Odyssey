@@ -59,3 +59,9 @@ for (let n of numbers()) {
 }
 // 1
 // 2
+
+const genNum = numbers();
+console.log(genNum.next().value); // 1
+console.log(genNum.next().value); // 2
+console.log(genNum.next().value); // 3
+console.log(genNum.next().value); //undefined

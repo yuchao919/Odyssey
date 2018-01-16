@@ -1,3 +1,26 @@
+function eg0(params) {
+  var g = function*() {
+    try {
+      yield;
+    } catch (e) {
+      console.log('内部捕获', e);
+    }
+  };
+
+  var i = g();
+  i.next();
+
+  try {
+    i.throw('a');
+    i.throw('b');
+  } catch (e) {
+    console.log('外部捕获', e);
+  }
+  // 内部捕获 a
+  // 外部捕获 b
+}
+eg0();
+
 function eg1() {
   var g = function*() {
     while (true) {
@@ -154,5 +177,3 @@ function eg7() {
   // 第三次运行next方法 { value: undefined, done: true }
   // caller done
 }
-
-eg7();

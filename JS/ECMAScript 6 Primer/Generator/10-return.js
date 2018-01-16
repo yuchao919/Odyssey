@@ -1,16 +1,19 @@
 function eg1() {
   function* gen() {
     yield 1;
+    console.log('123');
     yield 2;
     yield 3;
   }
 
   var g = gen();
 
-  g.next(); // { value: 1, done: false }
-  g.return('foo'); // { value: "foo", done: true }
-  g.next(); // { value: undefined, done: true }s
+  console.log(g.next()); // { value: 1, done: false }
+  console.log(g.return('foo')); // { value: "foo", done: true } // 不往下执行，直接return
+  console.log(g.next()); // { value: undefined, done: true }s
 }
+
+eg1();
 
 function eg2() {
   function* numbers() {
