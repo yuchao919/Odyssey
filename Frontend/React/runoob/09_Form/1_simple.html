@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>菜鸟教程 React 实例</title>
+  <script src="/public/react/15.4.2/react.min.js"></script>
+  <script src="/public/react/15.4.2/react-dom.min.js"></script>
+  <script src="/public/babel-standalone/6.22.1/babel.min.js"></script>
+</head>
+
+<body>
+  <div id="example"></div>
+  <script type="text/babel">
+    var HelloMessage = React.createClass({
+      getInitialState: function() {
+        return {value: 'Hello Runoob!'};
+      },
+      handleChange: function(event) {
+        this.setState({value: event.target.value});
+      },
+      render: function() {
+        var value = this.state.value;
+        return (
+          <div>
+            <input type="text" value={value} onChange={this.handleChange} /> 
+            <h4>{value}</h4>
+          </div>);
+      }
+    });
+    ReactDOM.render(
+      <HelloMessage />,
+      document.getElementById('example')
+    );
+    </script>
+</body>
+
+</html>
