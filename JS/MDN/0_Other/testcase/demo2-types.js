@@ -1,4 +1,6 @@
 console.log(/*******/);
+class foo {}
+
 var objArr = [
   1, // [object Number]
   'str', // [object String]
@@ -8,7 +10,6 @@ var objArr = [
   { 1: 1 }, // [object Object]
   null, // [object Null]
   undefined, // [object Undefined]
-
   Number(1), // [object Number]
   String('str'), // [object String]
   new Date(), // [object Date]
@@ -27,7 +28,9 @@ var objArr = [
   function*() {}, // [object GeneratorFunction]
   (function*() {})(), // [object Generator]
   async function f() {}, // [object AsyncFunction]
-  (async function f() {})() // [object Promise]
+  (async function f() {})(), // [object Promise]
+  foo, // [object Function]
+  new foo() // [object Object]
 ].forEach(obj => {
   console.log(Object.prototype.toString.call(obj));
 });
