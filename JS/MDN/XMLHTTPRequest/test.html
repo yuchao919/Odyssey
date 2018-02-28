@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var xhr = new XMLHttpRequest(),
+      method = "GET",
+      url = "https://cnodejs.org/api/v1/topics";
+
+    xhr.open(method, url, true);
+
+    // xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+    // xhr.setRequestHeader("Access-Control-Allow-Headers", "Content-Type");
+
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+        debugger;
+        var data = JSON.parse(xhr.responseText);
+        console.log(data.success);
+      }
+    };
+
+    xhr.onload = function () {
+      debugger;
+      // Request finished. Do processing here.
+    };
+
+    xhr.send(null);
+// xhr.send('string');
+// xhr.send(new Blob());
+// xhr.send(new Int8Array());
+// xhr.send({ form: 'data' });
+// xhr.send(document);
+  </script>
+</body>
+
+</html>
