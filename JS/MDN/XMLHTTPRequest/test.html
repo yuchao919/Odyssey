@@ -12,23 +12,21 @@
   <script>
     var xhr = new XMLHttpRequest(),
       method = "GET",
-      url = "https://cnodejs.org/api/v1/topics";
+      url = "http://localhost:3000/cors";
 
     xhr.open(method, url, true);
 
     // xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
     // xhr.setRequestHeader("Access-Control-Allow-Headers", "Content-Type");
 
-    xhr.onreadystatechange = function () {
+    xhr.onreadystatechange = function (ev) {
       if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-        debugger;
         var data = JSON.parse(xhr.responseText);
         console.log(data.success);
       }
     };
 
     xhr.onload = function () {
-      debugger;
       // Request finished. Do processing here.
     };
 

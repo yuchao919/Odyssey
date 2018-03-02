@@ -14,10 +14,12 @@
   <script type="text/babel">
     var Content = React.createClass({
       render: function() {
-        return  <div>
-                  <button onClick = {this.props.updateStateProp}>点我</button>
-                  <h4>{this.props.myDataProp}</h4>
-               </div>
+        return  (
+          <div>
+            <button onClick = {this.props.updateStateProp}>点我</button>
+            <h4>{this.props.myDataProp}</h4>
+          </div>
+        )
       }
     });
     var HelloMessage = React.createClass({
@@ -29,12 +31,11 @@
       },
       render: function() {
         var value = this.state.value;
-        return <div>
-                <Content 
-                  myDataProp = {value} 
-                  updateStateProp = {this.handleChange}>
-                </Content>
-               </div>;
+        return (
+          <div>
+           <Content myDataProp={value} updateStateProp={this.handleChange}></Content>
+          </div>
+        );
       }
     });
     ReactDOM.render(
