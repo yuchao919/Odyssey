@@ -1,21 +1,44 @@
-class Toggle extends React.Component {
+
+
+function WarningBanner(props) {
+  if (!props.warn) {
+    return null;
+  }
+
+  return (
+    <div className="warning">
+      Warning!
+    </div>
+  );
+}
+
+class Page extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { isToggleOn: true };
-
-    // This binding is necessary to make `this` work in the callback
-    this.handleClick = this.handleClick.bind(this);
+    this.state = {showWarning: true};
+    this.handleToggleClick = this.handleToggleClick.bind(this);
   }
-  
-  handleClick() {
+
+  handleToggleClick() {
     this.setState(prevState => ({
-      isToggleOn: !prevState.isToggleOn
+      showWarning: !prevState.showWarning
     }));
   }
 
   render() {
-    return <button onClick={this.handleClick}>{this.state.isToggleOn ? 'ON' : 'OFF'}</button>;
+    return (
+      <div>
+        <WarningBanner warn={this.state.showWarning} />
+        <button onClick={this.handleToggleClick}>
+          {this.state.showWarning ? 'Hide' : 'Show'}
+        </button>
+      </div>
+    );
   }
 }
 
-ReactDOM.render(<Toggle />, document.getElementById('root'));
+ReactDOM.render(
+  <Page />,
+  document.getElementById('root')
+);
+
