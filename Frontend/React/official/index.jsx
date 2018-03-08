@@ -1,86 +1,73 @@
-class ProductCategoryRow extends React.Component {
+// These two containers are siblings in the DOM
+const appRoot = document.getElementById('app-root');
+const modalRoot = document.getElementById('modal-root');
+
+class Modal extends React.Component {
+  constructor(props) {
+    super(props);
+    this.el = document.createElement('div');
+  }
+
+  componentDidMount() {
+    // The portal element is inserted in the DOM tree after
+    // the Modal's children are mounted, meaning that children
+    // will be mounted on a detached DOM node. If a child
+    // component requires to be attached to the DOM tree
+    // immediately when mounted, for example to measure a
+    // DOM node, or uses 'autoFocus' in a descendant, add
+    // state to Modal and only render the children when Modal
+    // is inserted in the DOM tree.
+    modalRoot.appendChild(this.el);
+  }
+
+  componentWillUnmount() {
+    modalRoot.removeChild(this.el);
+  }
+
   render() {
-    const category = this.props.category;
-    return (
-      <tr>
-        <th colSpan="2">{category}</th>
-      </tr>
-    );
+    return ReactDOM.createPortal(this.props.children, this.el);
   }
 }
 
-class ProductRow extends React.Component {
-  render() {
-    const product = this.props.product;
-    const name = product.stocked ? product.name : <span style={{ color: 'red' }}>{product.name}</span>;
-
-    return (
-      <tr>
-        <td>{name}</td>
-        <td>{product.price}</td>
-      </tr>
-    );
+class Parent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { clicks: 0 };
+    this.handleClick = this.handleClick.bind(this);
   }
-}
 
-class ProductTable extends React.Component {
-  render() {
-    const rows = [];
-    let lastCategory = null;
-
-    this.props.products.forEach(product => {
-      if (product.category !== lastCategory) {
-        rows.push(<ProductCategoryRow category={product.category} key={product.category} />);
-      }
-      rows.push(<ProductRow product={product} key={product.name} />);
-      lastCategory = product.category;
-    });
-
-    return (
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Price</th>
-          </tr>
-        </thead>
-        <tbody>{rows}</tbody>
-      </table>
-    );
+  handleClick() {
+    // This will fire when the button in Child is clicked,
+    // updating Parent's state, even though button
+    // is not direct descendant in the DOM.
+    this.setState(prevState => ({
+      clicks: prevState.clicks + 1
+    }));
   }
-}
 
-class SearchBar extends React.Component {
   render() {
     return (
-      <form>
-        <input type="text" placeholder="Search..." />
+      <div onClick={this.handleClick}>
+        <p>Number of clicks: {this.state.clicks}</p>
         <p>
-          <input type="checkbox" /> Only show products in stock
+          Open up the browser DevTools to observe that the button is not a child of the div with the onClick handler.
         </p>
-      </form>
-    );
-  }
-}
-
-class FilterableProductTable extends React.Component {
-  render() {
-    return (
-      <div>
-        <SearchBar />
-        <ProductTable products={this.props.products} />
+        <Modal>
+          <Child />
+        </Modal>
       </div>
     );
   }
 }
 
-const PRODUCTS = [
-  { category: 'Sporting Goods', price: '$49.99', stocked: true, name: 'Football' },
-  { category: 'Sporting Goods', price: '$9.99', stocked: true, name: 'Baseball' },
-  { category: 'Sporting Goods', price: '$29.99', stocked: false, name: 'Basketball' },
-  { category: 'Electronics', price: '$99.99', stocked: true, name: 'iPod Touch' },
-  { category: 'Electronics', price: '$399.99', stocked: false, name: 'iPhone 5' },
-  { category: 'Electronics', price: '$199.99', stocked: true, name: 'Nexus 7' }
-];
+function Child() {
+  // The click event on this button will bubble up to parent,
+  // because there is no 'onClick' attribute defined
+  return (
+    <div className="modal">
+      <button>Click</button>
+    </div>
+  );
+}
 
-ReactDOM.render(<FilterableProductTable products={PRODUCTS} />, document.getElementById('root'));
+ReactDOM.render(<Parent />, appRoot);
