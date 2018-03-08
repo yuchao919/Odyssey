@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Hello World</title>
+  <script src="/public/react.production.min.js"></script>
+  <script src="/public/react-dom.production.min.js"></script>
+  <script src="/public/babel.min.js"></script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const scaleNames = {
+      c: 'Celsius',
+      f: 'Fahrenheit'
+    };
+
+    function toCelsius(fahrenheit) {
+      return (fahrenheit - 32) * 5 / 9;
+    }
+
+    function toFahrenheit(celsius) {
+      return celsius * 9 / 5 + 32;
+    }
+
+    function tryConvert(temperature, convert) {
+      const input = parseFloat(temperature);
+      if (Number.isNaN(input)) {
+        return '';
+      }
+      const output = convert(input);
+      const rounded = Math.round(output * 1000) / 1000;
+      return rounded.toString();
+    }
+
+    class BoilingVerdict extends React.Component {
+      render() {
+        if (this.props.celsius >= 100) {
+          return <p>The water would boil.</p>;
+        }
+        return <p>The water would not boil.</p>;
+      }
+    }
+
+    class TemperatureInput extends React.Component {
+      constructor(props) {
+        super(props);
+      }
+
+      render() {
+        return (
+          <fieldset>
+            <legend>Enter temperature in {scaleNames[this.props.scale]}:</legend>
+            <input value={this.props.temperature} onChange={this.props.onTemperatureChange} />
+          </fieldset>
+        );
+      }
+    }
+
+    class Calculator extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = { celsius: '', fahrenheit: '' };
+      }
+
+      handleCelsiusChange = e => {
+        let celsius = e.target.value;
+        this.setState({ celsius: celsius, fahrenheit: tryConvert(celsius, toFahrenheit) });
+      };
+
+      handleFahrenheitChange = e => {
+        let fahrenheit = e.target.value;
+        this.setState({ celsius: tryConvert(fahrenheit, toCelsius), fahrenheit: fahrenheit });
+      };
+
+      render() {
+        return (
+          <div>
+            <TemperatureInput scale="c" temperature={this.state.celsius} onTemperatureChange={this.handleCelsiusChange} />
+            <TemperatureInput
+              scale="f"
+              temperature={this.state.fahrenheit}
+              onTemperatureChange={this.handleFahrenheitChange}
+            />
+            <BoilingVerdict celsius={this.state.celsius} />
+          </div>
+        );
+      }
+    }
+    ReactDOM.render(<Calculator />, document.getElementById('root'));
+  </script>
+
+</body>
+
+</html>
