@@ -1,73 +1,27 @@
-// These two containers are siblings in the DOM
-const appRoot = document.getElementById('app-root');
-const modalRoot = document.getElementById('modal-root');
-
-class Modal extends React.Component {
+class MouseTracker extends React.Component {
   constructor(props) {
     super(props);
-    this.el = document.createElement('div');
+    this.handleMouseMove = this.handleMouseMove.bind(this);
+    this.state = { x: 0, y: 0 };
   }
 
-  componentDidMount() {
-    // The portal element is inserted in the DOM tree after
-    // the Modal's children are mounted, meaning that children
-    // will be mounted on a detached DOM node. If a child
-    // component requires to be attached to the DOM tree
-    // immediately when mounted, for example to measure a
-    // DOM node, or uses 'autoFocus' in a descendant, add
-    // state to Modal and only render the children when Modal
-    // is inserted in the DOM tree.
-    modalRoot.appendChild(this.el);
-  }
-
-  componentWillUnmount() {
-    modalRoot.removeChild(this.el);
-  }
-
-  render() {
-    return ReactDOM.createPortal(this.props.children, this.el);
-  }
-}
-
-class Parent extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { clicks: 0 };
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick() {
-    // This will fire when the button in Child is clicked,
-    // updating Parent's state, even though button
-    // is not direct descendant in the DOM.
-    this.setState(prevState => ({
-      clicks: prevState.clicks + 1
-    }));
+  handleMouseMove(event) {
+    this.setState({
+      x: event.clientX,
+      y: event.clientY
+    });
   }
 
   render() {
     return (
-      <div onClick={this.handleClick}>
-        <p>Number of clicks: {this.state.clicks}</p>
+      <div style={{ width: '100%', height: '100%' }} onMouseMove={this.handleMouseMove}>
+        <h1>Move the mouse around!</h1>
         <p>
-          Open up the browser DevTools to observe that the button is not a child of the div with the onClick handler.
+          The current mouse position is ({this.state.x}, {this.state.y})
         </p>
-        <Modal>
-          <Child />
-        </Modal>
       </div>
     );
   }
 }
 
-function Child() {
-  // The click event on this button will bubble up to parent,
-  // because there is no 'onClick' attribute defined
-  return (
-    <div className="modal">
-      <button>Click</button>
-    </div>
-  );
-}
-
-ReactDOM.render(<Parent />, appRoot);
+ReactDOM.render(<MouseTracker />, document.getElementById('root'));

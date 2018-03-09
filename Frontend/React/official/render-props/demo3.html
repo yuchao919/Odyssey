@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Hello World</title>
+  <script src="/public/react.development.js"></script>
+  <script src="/public/react-dom.development.js"></script>
+  <script src="/public/prop-types.js"></script>
+  <script src="/public/babel.min.js"></script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+  class Cat extends React.Component {
+      render() {
+        const mouse = this.props.mouse;
+        return <span style={{display: 'block', width: '20px', height: '20px', position: 'absolute', left: mouse.x, top: mouse.y }} >猫</span>;
+      }
+    }
+
+    class MouseWithCat extends React.Component {
+      constructor(props) {
+        super(props);
+        this.handleMouseMove = this.handleMouseMove.bind(this);
+        this.state = { x: 0, y: 0 };
+      }
+
+      handleMouseMove(event) {
+        this.setState({
+          x: event.clientX,
+          y: event.clientY
+        });
+      }
+
+      render() {
+        return (
+          <div style={{ height: '100%' }} onMouseMove={this.handleMouseMove}>
+            {/*
+              We could just swap out the <p> for a <Cat> here ... but then
+              we would need to create a separate <MouseWithSomethingElse>
+              component every time we need to use it, so <MouseWithCat>
+              isn't really reusable yet.
+            */}
+            <Cat mouse={this.state} />
+          </div>
+        );
+      }
+    }
+
+    class MouseTracker extends React.Component {
+      render() {
+        return (
+          <div>
+            <h1>Move the mouse around!</h1>
+            <MouseWithCat />
+          </div>
+        );
+      }
+    }
+
+    ReactDOM.render(<MouseTracker />, document.getElementById('root'));
+
+  </script>
+
+</body>
+
+</html>
