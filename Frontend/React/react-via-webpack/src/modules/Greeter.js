@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import message from '../json/message.json';
-import styles from '../css/Greeter.css';
 
 class Greeter extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
-      <div className={styles.root}>
+      <div className={'root'}>
         {message.greetText}
         <br />
-        I am really tired!
+        Hello {this.props.name}
       </div>
     );
   }

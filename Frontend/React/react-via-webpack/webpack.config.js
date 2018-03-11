@@ -1,23 +1,33 @@
 const path = require('path');
 
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+
 module.exports = {
-  entry: path.resolve(__dirname, 'src/main.js'),
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+  entry: {
+    main: path.resolve(__dirname, 'src/app.js'),
+    vendor: ['lodash', 'react', 'react-dom']
   },
-  devtool: 'inline-source-map',
+  output: {
+    chunkFilename: '[name].[hash].js',
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].[hash].js'
+  },
   module: {
     rules: [
-      { test: /\.less/, use: ['style-loader', 'css-loader', 'less-loader'] },
-      { test: /\.css$/, use: ['style-loader', 'css-loader'] },
-      { test: /\.(png|jpg|jpeg)$/, use: ['url'] },
+      // { test: /\.less/, use: ['style-loader', 'css-loader', 'less-loader'] },
+      // { test: /\.css$/, use: ['style-loader', 'css-loader'] },
       {
-        test: /index.html/,
-        use: {
-          loader: 'file-loader'
-        }
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: 'css-loader'
+        })
       },
+      { test: /\.(png|jpg|jpeg)$/, use: ['url'] },
       {
         test: /\.js$/,
         exclude: /(node_modules|bower_components)/,
@@ -30,7 +40,34 @@ module.exports = {
       }
     ]
   },
+  plugins: [
+    new CleanWebpackPlugin(['dist']),
+    new HtmlWebpackPlugin({
+      title: 'React via webpack',
+      template: 'src/index.html'
+      // hash: true
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor'
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'manifest'
+    }),
+    new ExtractTextPlugin('styles.css'),
+    // new UglifyJSPlugin({
+    //   sourceMap: true
+    // }),
+    // new webpack.DefinePlugin({
+    //   'process.env.NODE_ENV': JSON.stringify('production')
+    // }),
+    new webpack.NamedModulesPlugin(),
+    new webpack.HotModuleReplacementPlugin()
+  ],
+  devtool: 'inline-source-map',
+  // devtool: 'source-map',
   devServer: {
+    contentBase: './dist',
+    hotOnly: true,
     inline: true,
     port: 9000
   }
