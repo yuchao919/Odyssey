@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+
+
+<body>
+    <script>
+        console.log(Date.now());
+        console.timeEnd("head+body");
+        console.time("body");
+    </script>
+    <h1>jQuery+RequireJS Sample Page</h1>
+    <p>Look at source or inspect the DOM to see how it works.</p>
+    <script>
+        console.timeEnd("body");
+        console.log(Date.now());
+        alert('Stop body end');
+    </script>
+</body>
+
+<head>
+    <title>jQuery+RequireJS Sample Page</title>
+    <!-- <script data-main="js/app" src="js/lib/require.js"></script> -->
+
+    <script>
+        alert('Stop head start');
+        console.log(Date.now());
+        console.time("head");
+    </script>
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script>
+        console.timeEnd("head");
+        console.time("head+body");
+    </script>
+    <style>
+        body {
+            color: red
+        }
+    </style>
+</head>
+
+</html>

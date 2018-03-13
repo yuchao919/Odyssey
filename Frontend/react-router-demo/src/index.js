@@ -10,8 +10,13 @@ import { BrowserRouter } from 'react-router-dom';
 // import CustomLinkExample from './Official/04CustomLinkExample';
 // import PreventingTransitionsExample from './Official/05PreventingTransitionsExample';
 // import NoMatchExample from './Official/06NoMatchExample';
-import RecursiveExample from './Official/07RecursiveExample';
-
+// import RecursiveExample from './Official/07RecursiveExample';
+// import SidebarExample from './Official/08SidebarExample';
+// import AnimationExample from './Official/09AnimationExample';
+// import AmbiguousExample from './Official/10AmbiguousExample';
+// import RouteConfigExample from './Official/11RouteConfigExample';
+// import ModalGallery from './Official/12ModalGallery';
+import StaticRouterExample from './Official/13StaticRouterExample';
 
 // import Lesson01 from './Lessons/01/App';
 // import Lesson02 from './Lessons/02/App';
@@ -21,4 +26,4 @@ import RecursiveExample from './Official/07RecursiveExample';
 // import Demo1 from './Demo/demo1';
 // import Demo2 from './Demo/demo2';
 
-render(<RecursiveExample />, document.getElementById('root'));
+render(<StaticRouterExample />, document.getElementById('root'));
