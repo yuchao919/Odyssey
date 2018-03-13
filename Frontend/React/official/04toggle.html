@@ -6,7 +6,7 @@
   <title>Hello World</title>
   <script src="/public/react.production.min.js"></script>
   <script src="/public/react-dom.production.min.js"></script>
-  <script src="/public/babel.min.js"></script>
+  <script src="/public/babel.js"></script>
 </head>
 
 <body>
@@ -18,14 +18,18 @@
         this.state = { isToggleOn: true };
 
         // This binding is necessary to make `this` work in the callback
-        this.handleClick = this.handleClick.bind(this);
+        // this.handleClick = this.handleClick.bind(this);
       }
 
-      handleClick() {
+      // 可以这么干啊。。。为啥编译环境不能自动转换啊。。。 ！！！！
+      // 这个在浏览器环境不能在class里面使用箭头函数定义对象方法！
+      // 这已经不是es2015的语法了 鬼知道这是什么玩意！
+      // 不研究了 浪费时间！
+      handleClick = (e) => {
         this.setState(prevState => ({
           isToggleOn: !prevState.isToggleOn
-        }));
-      }
+        }))
+      };
 
       render() {
         return <button onClick={this.handleClick}>{this.state.isToggleOn ? 'ON' : 'OFF'}</button>;
