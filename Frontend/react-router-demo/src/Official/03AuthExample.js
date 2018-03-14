@@ -7,8 +7,8 @@ import { BrowserRouter as Router, Route, Link, Redirect, withRouter } from 'reac
 // 3. Log in
 // 4. Click the back button, note the URL each time
 
-const AuthExample = () => (
-  <Router>
+const AuthExample = props => (
+  <Router basename={props.basename}>
     <div>
       <AuthButton />
       <ul>

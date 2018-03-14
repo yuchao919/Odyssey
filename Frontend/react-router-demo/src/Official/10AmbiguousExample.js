@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 
-const AmbiguousExample = () => (
-  <Router>
+const AmbiguousExample = props => (
+  <Router basename={props.basename}>
     <div>
       <ul>
         <li>

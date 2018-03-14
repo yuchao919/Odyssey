@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
-const BasicExample = () => (
-  <Router>
+const BasicExample = props => (
+  <Router basename={props.basename}>
     <div>
       <ul>
         <li>

@@ -169,8 +169,8 @@ const Modal = ({ match, history }) => {
   );
 };
 
-const ModalGallery = () => (
-  <Router>
+const ModalGallery = props => (
+  <Router basename={props.basename}>
     <Route component={ModalSwitch} />
   </Router>
 );

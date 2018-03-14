@@ -65,8 +65,8 @@ const RouteWithSubRoutes = route => (
   />
 );
 
-const RouteConfigExample = () => (
-  <Router>
+const RouteConfigExample = props => (
+  <Router basename={props.basename}>
     <div>
       <ul>
         <li>

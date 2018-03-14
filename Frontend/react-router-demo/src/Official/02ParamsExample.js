@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
-const ParamsExample = () => (
-  <Router>
+const ParamsExample = props => (
+  <Router basename={props.basename}>
     <div>
       <h2>Accounts</h2>
       <ul>

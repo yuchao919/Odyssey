@@ -10,8 +10,8 @@ const PEEPS = [
 
 const find = id => PEEPS.find(p => p.id == id);
 
-const RecursiveExample = () => (
-  <Router>
+const RecursiveExample = props => (
+  <Router basename={props.basename}>
     <Person match={{ params: { id: 0 }, url: '' }} />
   </Router>
 );

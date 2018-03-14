@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link, Switch, Redirect } from 'react-router-dom';
 
-const NoMatchExample = () => (
-  <Router>
+const NoMatchExample = props => (
+  <Router basename={props.basename}>
     <div>
       <ul>
         <li>

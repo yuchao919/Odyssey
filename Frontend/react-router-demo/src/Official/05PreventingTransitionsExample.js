@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link, Prompt } from 'react-router-dom';
 
-const PreventingTransitionsExample = () => (
-  <Router>
+const PreventingTransitionsExample = props => (
+  <Router basename={props.basename}>
     <div>
       <ul>
         <li>

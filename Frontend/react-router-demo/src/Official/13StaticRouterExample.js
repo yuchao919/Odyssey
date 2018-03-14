@@ -51,7 +51,7 @@ class StaticRouterExample extends React.Component {
 
   render() {
     return (
-      <StaticRouter location="/foo" context={this.staticContext}>
+      <StaticRouter location="/foo" context={this.staticContext} basename={this.props.basename}>
         <div>
           <RouteStatus statusCode={404}>
             <p>Route with statusCode 404</p>

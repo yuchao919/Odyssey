@@ -2,7 +2,7 @@ import React from 'react';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { BrowserRouter as Router, Switch, Route, Link, Redirect } from 'react-router-dom';
 
-import css from './09AnimationExample.css';
+import css from './App.css';
 
 /* you'll need this CSS somewhere
 .fade-enter {
@@ -63,8 +63,8 @@ styles.rgb = {
   fontSize: '30px'
 };
 
-const AnimationExample = () => (
-  <Router>
+const AnimationExample = props => (
+  <Router basename={props.basename}>
     <Route
       render={({ location }) => (
         <div style={styles.fill}>

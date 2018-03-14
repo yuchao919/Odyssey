@@ -24,8 +24,8 @@ const routes = [
   }
 ];
 
-const SidebarExample = () => (
-  <Router>
+const SidebarExample = props => (
+  <Router basename={props.basename}>
     <div style={{ display: 'flex' }}>
       <div
         style={{
