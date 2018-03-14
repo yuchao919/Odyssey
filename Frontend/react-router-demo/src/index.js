@@ -10,6 +10,6 @@ import { render } from 'react-dom';
 // import Demo2 from './Demo/demo2';
 
 import App from './Official/App';
-// import BasicExample from './Official/01BasicExample';
+import BasicExample from './Official/01BasicExample';
 
-render(<App />, document.getElementById('root'));
+render(<BasicExample />, document.getElementById('root'));
