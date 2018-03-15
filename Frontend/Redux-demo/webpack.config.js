@@ -43,9 +43,12 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(['dist']),
+    // new webpack.DefinePlugin({
+    //   'process.env.NODE_ENV': JSON.stringify('production')
+    // }),
     new HtmlWebpackPlugin({
       title: 'React via webpack',
-      template: 'src/index.html'
+      template: 'public/index.html'
       // hash: true
     }),
     new webpack.HashedModuleIdsPlugin(),

@@ -8,8 +8,8 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   entry: {
-    main: path.resolve(__dirname, 'src/app.js'),
-    vendor: ['lodash', 'react', 'react-dom']
+    main: path.resolve(__dirname, 'src/index.js'),
+    vendor: ['react', 'react-dom', 'react-router-dom']
   },
   output: {
     chunkFilename: '[name].[hash].js',
@@ -43,11 +43,15 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(['dist']),
+    // new webpack.DefinePlugin({
+    //   'process.env.NODE_ENV': JSON.stringify('production')
+    // }),
     new HtmlWebpackPlugin({
       title: 'React via webpack',
-      template: 'src/index.html'
+      template: 'public/index.html'
       // hash: true
     }),
+    new webpack.HashedModuleIdsPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor'
     }),
