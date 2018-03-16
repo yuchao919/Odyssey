@@ -1,11 +1,20 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { browserHistory } from 'react-router';
-import { syncHistoryWithStore } from 'react-router-redux';
-import Root from './containers/Root';
-import configureStore from './store/configureStore';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import App from './components/App';
+import reducer from './reducers';
+import { addTodo } from './actions';
 
-const store = configureStore();
-const history = syncHistoryWithStore(browserHistory, store);
+const store = createStore(reducer);
 
-render(<Root store={store} history={history} />, document.getElementById('root'));
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+);
+
+// setInterval(() => {
+//   store.dispatch(addTodo('Hello world'));
+// }, 1e3);
