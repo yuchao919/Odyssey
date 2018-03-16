@@ -5,6 +5,11 @@ const setMark = squareIndex => ({
   type: 'SET_MARK',
   squareIndex: squareIndex
 });
+const jumpTo = step => ({
+  type: 'JUMP_TO',
+  stepNumber: step,
+  xIsNext: step % 2 === 0
+});
 
 const game = (
   state = {
@@ -25,7 +30,8 @@ const game = (
       }
       squares[i] = state.xIsNext ? 'X' : 'O';
       return {
-        history: historyOperation.concat([
+        ...state,
+        historyOperation: historyOperation.concat([
           {
             squares: squares
           }
@@ -33,6 +39,13 @@ const game = (
         stepNumber: historyOperation.length,
         xIsNext: !state.xIsNext
       };
+    case 'JUMP_TO':
+      return {
+        ...state,
+        stepNumber: action.stepNumber,
+        xIsNext: action.xIsNext
+      };
+      break;
     default:
       return state;
   }
@@ -95,8 +108,8 @@ class Game extends React.Component {
     super(props);
   }
 
-  jumpTo() {
-    alert('jump');
+  jumpTo(step) {
+    this.props.onJumpTo(step);
   }
 
   render() {
@@ -134,15 +147,15 @@ class Game extends React.Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  return state.game;
-};
-
-const mapDispatchToProps = {
-  onSquareClick: setMark
-};
-
-Game = connect(mapStateToProps, mapDispatchToProps)(Game);
+Game = connect(
+  (state, ownProps) => {
+    return state.game;
+  },
+  {
+    onSquareClick: setMark,
+    onJumpTo: jumpTo
+  }
+)(Game);
 
 ReactDOM.render(
   <Provider store={store}>
