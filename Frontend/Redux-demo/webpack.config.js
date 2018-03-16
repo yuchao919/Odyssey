@@ -9,7 +9,7 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 module.exports = {
   entry: {
     main: path.resolve(__dirname, 'src/index.js'),
-    vendor: ['react', 'react-dom', 'react-router-dom']
+    vendor: ['react', 'react-dom']
   },
   output: {
     chunkFilename: '[name].[hash].js',
@@ -35,7 +35,7 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: ['env', 'react'],
-            plugins: ['transform-object-rest-spread']
+            plugins: ['transform-object-rest-spread', 'transform-class-properties']
           }
         }
       }
