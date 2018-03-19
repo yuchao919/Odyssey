@@ -25,21 +25,19 @@ export const receivePosts = (reddit, json) => ({
   receivedAt: Date.now()
 });
 
-// // babel转化失败，暂时不考虑这种写法吧~~
-// async function fetchPostsAsync(reddit) {
-//   const response = await fetch(`https://www.reddit.com/r/${reddit}.json`);
-//   const json = await response.json();
-//   return receivePosts(reddit, json);
-// }
+// babel转化失败，暂时不考虑这种写法吧~~
+async function fetchPostsAsync(reddit) {
+  const response = await fetch(`https://www.reddit.com/r/${reddit}.json`);
+  const json = await response.json();
+  return receivePosts(reddit, json);
+}
 
 const fetchPosts = reddit => dispatch => {
   dispatch(requestPosts(reddit));
-  return fetch(`https://www.reddit.com/r/${reddit}.json`)
-    .then(response => response.json())
-    .then(json => dispatch(receivePosts(reddit, json)));
-  // fetchPostsAsync(reddit).then(action => {
-  //   dispatch(action);
-  // });
+  // return fetch(`https://www.reddit.com/r/${reddit}.json`)
+  //   .then(response => response.json())
+  //   .then(json => dispatch(receivePosts(reddit, json)));
+  fetchPostsAsync(reddit).then(dispatch);
 };
 
 const shouldFetchPosts = (state, reddit) => {
