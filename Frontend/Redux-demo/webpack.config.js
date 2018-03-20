@@ -8,7 +8,7 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   entry: {
-    main: path.resolve(__dirname, 'async/index.js'),
+    main: path.resolve(__dirname, 'saga-reddit/index.js'),
     vendor: ['react', 'react-dom']
   },
   output: {

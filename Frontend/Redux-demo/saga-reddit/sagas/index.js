@@ -26,5 +26,12 @@ function* fetchPostAsync({ reddit }) {
 }
 
 export default function* rootSaga() {
-  yield takeEvery('FETCH_POST_ASYNC', fetchPostAsync);
+  yield all([
+    takeEvery('FETCH_POST_ASYNC', fetchPostAsync),
+    // takeEvery('*', function* logger(action) {
+    //   debugger;
+    //   console.log('action', action);
+    //   console.log('state after', yield select());
+    // })
+  ]);
 }
