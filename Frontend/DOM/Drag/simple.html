@@ -10,13 +10,15 @@
     * {
       /* -webkit-transition: all 0.2s;
       transition: all 0.2s; */
+      margin: 0;
+      padding: 0;
     }
 
     #container {
       width: 100%;
       height: 500px;
       background-color: cornflowerblue;
-      position: absolute;
+      position: relative;
     }
 
     #p1 {
@@ -29,54 +31,65 @@
     }
   </style>
   <script>
-    (function () {
-      function drag_handler(ev) {
-        ev.target.style.transform = `translate(${ev.clientX}px, ${ev.clientY}px)`
-      }
+    var offsetX, offsetY, msX, msY;
+    function drag_handler(ev) {
+      console.log('drag');
+      // ev.target.style.transform = `translate(${ev.clientX}px, ${ev.clientY}px)`
+      // console.log(ev.dataTransfer);
+      // ev.target.style.transform = `translate(${offsetX + ev.clientX - msX}px, ${offsetY + ev.clientY - msY}px)`
+    }
 
 
-      function dragstart_handler(ev) {
-        console.log(ev.target.scrollHeight);
-        // console.log(ev.target.attributes);
-        // mouseStartX = ev.clientX;
-        // mouseStartY = ev.clientY;
-        // console.log('start:');
-        // console.log(ev);
-        // // Add the target element's id to the data transfer object
-        // // ev.dataTransfer.setData("text/plain", ev.target.id);
-        // ev.dataTransfer.setData("text/html", "<p>Example paragraph</p>");
-        // // ev.dataTransfer.setData("text/uri-list", "http://developer.mozilla.org");
-      }
+    function dragstart_handler(ev) {
+      console.log('dragstart');
+      // msX = ev.clientX;
+      // msY = ev.clientY;
+      // var arr = ev.target.style.transform.match(/\d+/g) || [0, 0];
+      // offsetX = parseInt(arr[0]);
+      // offsetY = parseInt(arr[1]);
 
-      function dragend_handler(ev) {
-        ev.target.style.transform = `translate(${ev.clientX}px, ${ev.clientY}px)`
-        console.log(ev.target.scrollHeight);
-      }
 
-      function dragover_handler(ev) {
-        console.log('dragover_handler');
-      }
+      // console.log(ev.target.offsetLeft);
+      // console.log(ev.target.attributes);
+      // mouseStartX = ev.clientX;
+      // mouseStartY = ev.clientY;
+      // console.log('start:');
+      // console.log(ev);
+      // // Add the target element's id to the data transfer object
+      // // ev.dataTransfer.setData("text/plain", ev.target.id);
+      // ev.dataTransfer.setData("text/html", "<p>Example paragraph</p>");
+      // // ev.dataTransfer.setData("text/uri-list", "http://developer.mozilla.org");
+    }
 
-      window.onload = function () {
-        var p1 = document.getElementById("p1");
-        p1.draggable = true;
-        p1.addEventListener('drag', drag_handler)
-        p1.addEventListener('dragstart', dragstart_handler)
-        p1.addEventListener('dragend', dragend_handler)
-        // p1.addEventListener('dragover', dragover_handler)
+    function dragend_handler(ev) {
+      console.log('dragend_handler');
+      // ev.target.style.transform = `translate(${ev.clientX}px, ${ev.clientY}px)`
+      // ev.target.style.transform = `translate(${offsetX + ev.clientX - msX}px, ${offsetY + ev.clientY - msY}px)`
+    }
 
-        document.addEventListener('click', function (ev) {
-          console.log(ev.clientX);
-        })
-      }
-    })()
+    function dragover_handler(ev) {
+      // console.log('dragover_handler');
+    }
+
+      // document.addEventListener('DOMContentLoaded', function () {
+      //   document.removeEventListener('DOMContentLoaded', arguments.callee, false);
+
+      // }, false)
+
+      // var p1 = document.getElementById("p1");
+      // p1.draggable = true;
+      // p1.addEventListener('drag', drag_handler)
+      // p1.addEventListener('dragstart', dragstart_handler)
+      // p1.addEventListener('dragend', dragend_handler)
 
   </script>
 </head>
 
 <body>
   <div id="container">
-    <p id="p1">This element is draggable.</p>
+    <!-- <p id="p1">This element is draggable.</p> -->
+    <!-- <p id="p1" draggable="true">This element is draggable.</p> -->
+    <p id="p1" ondrag="drag_handler(event);" ondragstart="dragstart_handler(event);" draggable="true">This element is draggable.</p>
   </div>
 </body>
 
