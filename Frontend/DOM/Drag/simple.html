@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      /* -webkit-transition: all 0.2s;
+      transition: all 0.2s; */
+    }
+
+    #container {
+      width: 100%;
+      height: 500px;
+      background-color: cornflowerblue;
+      position: absolute;
+    }
+
+    #p1 {
+      position: relative;
+      display: block;
+      width: 300px;
+      height: 100px;
+      background-color: antiquewhite;
+      /* Safari 和 Chrome */
+    }
+  </style>
+  <script>
+    (function () {
+      function drag_handler(ev) {
+        ev.target.style.transform = `translate(${ev.clientX}px, ${ev.clientY}px)`
+      }
+
+
+      function dragstart_handler(ev) {
+        console.log(ev.target.scrollHeight);
+        // console.log(ev.target.attributes);
+        // mouseStartX = ev.clientX;
+        // mouseStartY = ev.clientY;
+        // console.log('start:');
+        // console.log(ev);
+        // // Add the target element's id to the data transfer object
+        // // ev.dataTransfer.setData("text/plain", ev.target.id);
+        // ev.dataTransfer.setData("text/html", "<p>Example paragraph</p>");
+        // // ev.dataTransfer.setData("text/uri-list", "http://developer.mozilla.org");
+      }
+
+      function dragend_handler(ev) {
+        ev.target.style.transform = `translate(${ev.clientX}px, ${ev.clientY}px)`
+        console.log(ev.target.scrollHeight);
+      }
+
+      function dragover_handler(ev) {
+        console.log('dragover_handler');
+      }
+
+      window.onload = function () {
+        var p1 = document.getElementById("p1");
+        p1.draggable = true;
+        p1.addEventListener('drag', drag_handler)
+        p1.addEventListener('dragstart', dragstart_handler)
+        p1.addEventListener('dragend', dragend_handler)
+        // p1.addEventListener('dragover', dragover_handler)
+
+        document.addEventListener('click', function (ev) {
+          console.log(ev.clientX);
+        })
+      }
+    })()
+
+  </script>
+</head>
+
+<body>
+  <div id="container">
+    <p id="p1">This element is draggable.</p>
+  </div>
+</body>
+
+</html>
