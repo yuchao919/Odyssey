@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<script>
+  function debounce(fn, delta, context) {
+    var timeoutID = null;
+
+    return function () {
+      clearTimeout(timeoutID);
+
+      var args = arguments;
+      timeoutID = setTimeout(function () {
+        fn.apply(context, args);
+      }, delta);
+    };
+  }
+
+  function immediate(fn, delta, context) {
+    var timeoutID = null;
+    var safe = true;
+
+    return function () {
+      var args = arguments;
+
+      if (safe) {
+        fn.call(context, args);
+        safe = false;
+      }
+
+      clearTimeout(timeoutID);
+      timeoutID = setTimeout(function () {
+        safe = true;
+      }, delta);
+    };
+  }
+
+  function throttle(fn, delta, context) {
+    var safe = true;
+
+    return function () {
+      var args = arguments;
+
+      if (safe) {
+        fn.call(context, args);
+
+        safe = false;
+        setTimeout(function () {
+          safe = true;
+        }, delta);
+      }
+    };
+  }
+</script>
+
+<body>
+  鼠标移动试试
+  <script>
+    function D() {
+      document.body.innerHTML += 'D<br>';
+    }
+    function I() {
+      document.body.innerHTML += 'I<br>';
+    }
+    function T() {
+      document.body.innerHTML += 'T<br>';
+    }
+
+    window.addEventListener('mousemove', throttle(T, 1000));
+    window.addEventListener('mousemove', debounce(D, 1000));
+    window.addEventListener('mousemove', immediate(I, 1000));
+  </script>
+</body>
+
+</html>
