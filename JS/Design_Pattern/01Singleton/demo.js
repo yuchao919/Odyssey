@@ -1,11 +1,11 @@
-const getSingle = function(fn) {
+const getSingle = function (fn) {
   let result;
-  return function() {
+  return function () {
     return result || (result = fn.apply(this, arguments));
   };
 };
 
-const createLayer = function(name) {
+const createLayer = function (name) {
   const obj = { name };
   return obj;
 };
