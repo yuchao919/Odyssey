@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title></title>
+  <style type="text/css">
+    .myDiv {
+      width: 600px;
+      height: 400px;
+      margin: 20px auto;
+      background-size: over;
+      background-position: center;
+      -webkit-animation-name: 'loop';
+      -webkit-animation-duration: 20s;
+      -webkit-animation-iteration-count: infinite;
+    }
+
+    @keyframes loop {
+      0% {
+        background: url(/public/pic1.jpg) no-repeat;
+      }
+      25% {
+        background: url(/public/pic2.jpg) no-repeat;
+      }
+      50% {
+        background: url(/public/pic3.jpg) no-repeat;
+      }
+      75% {
+        background: url(/public/pic4.jpg) no-repeat;
+      }
+      100% {
+        background: url(/public/pic5.jpg) no-repeat;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="myDiv"></div>
+</body>
+
+</html>
