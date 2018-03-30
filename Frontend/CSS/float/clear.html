@@ -1,0 +1,46 @@
+<html>
+
+<head>
+  <title>clear</title>
+  <style>
+    div {
+      border: 1px solid
+    }
+
+    .div-float {
+      /* float: left; */
+    }
+
+    .clearfix:after {
+      content: ".";
+      display: block;
+      height: 0;
+      visibility: hidden;
+      clear: both;
+    }
+
+    .clearfix {
+      *zoom: 1;
+    }
+
+    .center {
+      margin: 0 auto;
+    }
+
+    .second {
+      float: left;
+      height: 100px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="outer">
+    <!--这里添加了一个class-->
+    <div class="div-float first">1</div>
+    <div class="div-float second">2</div>
+    <div class="div-float third">3</div>
+  </div>
+</body>
+
+</html>
