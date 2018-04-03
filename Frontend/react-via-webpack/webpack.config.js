@@ -6,6 +6,8 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+
 module.exports = {
   entry: {
     main: path.resolve(__dirname, 'src/app.js'),
@@ -25,6 +27,32 @@ module.exports = {
           use: 'css-loader'
         })
       },
+      {
+        test: /\.scss$/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true
+            }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: true
+            }
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true
+            }
+          }
+        ]
+      },
       // {
       //   test: /\.(png|jpg|jpeg)$/,
       //   use: {
@@ -41,18 +69,20 @@ module.exports = {
           loader: 'url-loader',
           options: {
             limit: 8192,
-            name:'images/[hash:8].[name].[ext]'
+            name: 'images/[hash:8].[name].[ext]'
           }
         }
       },
       {
-        test: /\.js$/,
-        exclude: /(node_modules|bower_components)/,
+        test: /\.(js|jsx)$/,
+        exclude: [/(node_modules|bower_components)/, /\.json$/],
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['env', 'react'],
-            plugins: ['transform-object-rest-spread']
+            presets: ['env', 'react-app'],
+            plugins: [
+              // ['transform-es2015-arrow-functions', { spec: true }], ['transform-object-rest-spread']
+            ]
           }
         }
       }

@@ -1,4 +1,7 @@
-html {
+html,
+body,
+#root {
+  height: 100%;
   box-sizing: border-box;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
@@ -12,6 +15,7 @@ html {
 
 body {
   margin: 0;
+  padding: 0;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   background: url('../images/bg.jpg') no-repeat 50%;
   background-size: cover;

@@ -1,0 +1,19 @@
+$font-stack: Helvetica, sans-serif;
+$primary-color: #eee;
+$border-color: #ccc;
+
+.root {
+  background-color: $primary-color;
+  padding: 10px;
+  border: 3px solid $border-color;
+  /* color: red; */
+}
+
+.txt {
+  border-radius: 5px;
+}
+
+.txt::placeholder {
+  color: red;
+  opacity: 0.5;
+}

@@ -1,25 +1,16 @@
 import React, { Component } from 'react';
-import message from '../json/message.json';
 
-const Hello = () => {
-  console.log('Hello');
-};
+import './Greeter.scss';
+import message from '../../assets/json/message.json';
 
 class Greeter extends Component {
   constructor(props) {
     super(props);
-
-    this.handleClick = this.handleClick.bind(this);
   }
-
-  handleClick(e) {
-    alert(`Hello ${this.props.name}`);
-  }
-
-  // // 这种写法已经不是ES2015(ES6)的写法了，干死babel
-  // handleClick = e => {
-  //   alert(`Hello ${this.props.name}`);
-  // };
+  handleClick = e => {
+    const msg = this.textInput.value || this.props.name;
+    alert(`Hello ${msg}`);
+  };
 
   render() {
     return (
@@ -27,6 +18,8 @@ class Greeter extends Component {
         {message.greetText}
         <br />
         Hello {this.props.name}
+        <br />
+        <input type="text" className={'txt'} placeholder={'Please Input'} ref={el => (this.textInput = el)} />
         <br />
         <button onClick={this.handleClick}>Click me!</button>
       </div>
