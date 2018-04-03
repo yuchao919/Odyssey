@@ -8,8 +8,8 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   entry: {
-    main: path.resolve(__dirname, 'src/index.js'),
-    vendor: ['react', 'react-dom', 'react-router-dom']
+    main: path.resolve(__dirname, 'src/app.js'),
+    vendor: ['react', 'react-dom']
   },
   output: {
     chunkFilename: '[name].[hash].js',
@@ -18,8 +18,6 @@ module.exports = {
   },
   module: {
     rules: [
-      // { test: /\.less/, use: ['style-loader', 'css-loader', 'less-loader'] },
-      // { test: /\.css$/, use: ['style-loader', 'css-loader'] },
       {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
@@ -27,7 +25,26 @@ module.exports = {
           use: 'css-loader'
         })
       },
-      { test: /\.(png|jpg|jpeg)$/, use: ['url'] },
+      // {
+      //   test: /\.(png|jpg|jpeg)$/,
+      //   use: {
+      //     loader: 'file-loader',
+      //     options: {
+      //       name: 'assets/img/[name].[ext]?[hash:8]',
+      //       outputPath: './assets/img'
+      //     }
+      //   }
+      // },
+      {
+        test: /\.(jpg|png|gif)$/,
+        use: {
+          loader: 'url-loader',
+          options: {
+            limit: 8192,
+            name:'images/[hash:8].[name].[ext]'
+          }
+        }
+      },
       {
         test: /\.js$/,
         exclude: /(node_modules|bower_components)/,
@@ -47,7 +64,7 @@ module.exports = {
     //   'process.env.NODE_ENV': JSON.stringify('production')
     // }),
     new HtmlWebpackPlugin({
-      title: 'React via webpack',
+      title: 'React via Webpack',
       template: 'public/index.html'
       // hash: true
     }),

@@ -23,4 +23,5 @@ function component() {
 
   return element;
 }
+
 document.getElementById('root').appendChild(component());

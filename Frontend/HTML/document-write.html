@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title></title>
+  <meta http-equiv="Content-Type" content="text/html;charset=gb2312">
+  <script type="text/javascript">
+    function load(js) {
+      var s = document.createElement('script');
+      s.setAttribute('type', 'text/javascript');
+      s.setAttribute('src', js);
+      var head = document.getElementsByTagName('head');
+      head[0].appendChild(s);
+    }
+    function write(js) {
+      document.write('<script type="text/javascript" src="' + js + '" > <\/script>');
+    }
+    var jq = 'https://cdn.bootcss.com/jquery/3.3.1/jquery.js'
+    // load(jq);
+    // write(jq);  
+  </script>
+</head>
+
+<body>
+  <script>
+    alert($);
+  </script>
+</body>
+
+</html>
