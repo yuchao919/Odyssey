@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import './Greeter.scss';
+import styles from './Greeter.scss';
 import message from '../../assets/json/message.json';
 
 class Greeter extends Component {
@@ -20,7 +20,7 @@ class Greeter extends Component {
         <br />
         Hello {this.props.name}
         <br />
-        <input type="text" className={'txt'} placeholder="What`s your name?" ref={el => (this.TextInput = el)} />
+        <input type="text" className={styles.txt} placeholder="What`s your name?" ref={el => (this.TextInput = el)} />
         <button onClick={this.handleClick}>Click me!</button>
       </div>
     );
