@@ -14,13 +14,14 @@ class Greeter extends Component {
   // };
 
   render() {
+    let css = this.props.styles || styles;
     return (
       <div className={'root'}>
         {message.greetText}
         <br />
         Hello {this.props.name}
         <br />
-        <input type="text" className={styles.txt} placeholder="What`s your name?" ref={el => (this.TextInput = el)} />
+        <input type="text" className={css.txt} placeholder="What`s your name?" ref={el => (this.TextInput = el)} />
         <button onClick={this.handleClick}>Click me!</button>
       </div>
     );
