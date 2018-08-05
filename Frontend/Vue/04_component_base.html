@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>todo-item</title>
+  <script src="lib/vue.2.5.17.js"></script>
+</head>
+
+<body>
+  <div id="components-demo">
+    <button-counter :cnt="count" @add="add"></button-counter>
+    <button-counter :cnt="count"></button-counter>
+    <button-counter :cnt="count"></button-counter>
+  </div>
+
+  <script>
+    // 定义一个名为 button-counter 的新组件
+    Vue.component('button-counter', {
+      data: function () {
+        return {
+          count: 0
+        }
+      },
+      props: ['cnt'],
+      template: '<button v-on:click="add">You clicked me {{ count }} times.{{ cnt }}</button>',
+      methods: {
+        add: function () {
+          this.count++;
+          this.$emit('add')
+        }
+      }
+    });
+    new Vue({
+      el: '#components-demo',
+      data: {
+        count: 1
+      },
+      methods: {
+        add: function () {
+          this.count += 2;
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
