@@ -6,7 +6,7 @@ var objArr = [
   'str', // [object String]
   true, // [object Boolean]
   Symbol('foo'), // [object Symbol]
-  function foo(params) {},
+  function foo(params) {},// [object Function]
   { 1: 1 }, // [object Object]
   null, // [object Null]
   undefined, // [object Undefined]
