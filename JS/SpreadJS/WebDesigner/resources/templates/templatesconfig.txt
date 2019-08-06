@@ -1,0 +1,4 @@
+[
+{ "thumbClass": "template-thumb-blank", "name": "Blank" }
+]
+
