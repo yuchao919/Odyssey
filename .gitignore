@@ -4,6 +4,7 @@ a.out
 */*.out
 package-lock.json
 Frontend/package-lock.json
+<<<<<<< HEAD
 
 # Build Folders (you can keep bin if you'd like, to store dlls and pdbs)
 [Bb]in/
@@ -137,3 +138,6 @@ src/.vs/config/applicationhost.config
 !SQLite.Interop.dll
 /tools
 nupkg/push-hikalkan.bat
+=======
+ignore
+>>>>>>> Add SpreadJS

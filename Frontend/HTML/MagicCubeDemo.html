@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        /*最外层容器样式*/
+        .wrap {
+            width: 100px;
+            height: 100px;
+            margin: 150px;
+            position: relative;
+        }
+
+        /*包裹所有容器样式*/
+        .cube {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto;
+            transform-style: preserve-3d;
+            transform: rotateX(-30deg) rotateY(-80deg);
+            animation: rotate linear 20s infinite;
+        }
+
+        @-webkit-keyframes rotate {
+            from {
+                transform: rotateX(0deg) rotateY(0deg);
+            }
+
+            to {
+                transform: rotateX(360deg) rotateY(360deg);
+            }
+        }
+
+        .cube div {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            opacity: 0.8;
+            transition: all 0.4s;
+        }
+
+        /*定义所有图片样式*/
+        .pic {
+            width: 200px;
+            height: 200px;
+        }
+
+        .cube .out_front {
+            transform: rotateY(0deg) translateZ(100px);
+        }
+
+        .cube .out_back {
+            transform: translateZ(-100px) rotateY(180deg);
+        }
+
+        .cube .out_left {
+            transform: rotateY(-90deg) translateZ(100px);
+        }
+
+        .cube .out_right {
+            transform: rotateY(90deg) translateZ(100px);
+        }
+
+        .cube .out_top {
+            transform: rotateX(90deg) translateZ(100px);
+        }
+
+        .cube .out_bottom {
+            transform: rotateX(-90deg) translateZ(100px);
+        }
+
+        /*定义小正方体样式*/
+        .cube span {
+            display: block;
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top: 50px;
+            left: 50px;
+        }
+
+        .cube .in_pic {
+            width: 100px;
+            height: 100px;
+        }
+
+        .cube .in_front {
+            transform: rotateY(0deg) translateZ(50px);
+        }
+
+        .cube .in_back {
+            transform: translateZ(-50px) rotateY(180deg);
+        }
+
+        .cube .in_left {
+            transform: rotateY(-90deg) translateZ(50px);
+        }
+
+        .cube .in_right {
+            transform: rotateY(90deg) translateZ(50px);
+        }
+
+        .cube .in_top {
+            transform: rotateX(90deg) translateZ(50px);
+        }
+
+        .cube .in_bottom {
+            transform: rotateX(-90deg) translateZ(50px);
+        }
+
+        /*鼠标移入后样式*/
+        .cube:hover .out_front {
+            transform: rotateY(0deg) translateZ(200px);
+        }
+
+        .cube:hover .out_back {
+            transform: translateZ(-200px) rotateY(180deg);
+        }
+
+        .cube:hover .out_left {
+            transform: rotateY(-90deg) translateZ(200px);
+        }
+
+        .cube:hover .out_right {
+            transform: rotateY(90deg) translateZ(200px);
+        }
+
+        .cube:hover .out_top {
+            transform: rotateX(90deg) translateZ(200px);
+        }
+
+        .cube:hover .out_bottom {
+            transform: rotateX(-90deg) translateZ(200px);
+        }
+    </style>
+
+    <!-- 外层最大容器 -->
+    <div class="wrap">
+        <!--包裹所有元素的容器-->
+        <div class="cube">
+            <!--前面图片 -->
+            <div class="out_front">
+                <img src="http://img.3dmgame.com/uploads/allimg/160902/316-160Z2111022.jpg" class="pic" />
+            </div>
+            <!--后面图片 -->
+            <div class="out_back">
+                <img src="http://static.oneplus.cn/data/attachment/forum/201406/28/135601rs7v268yd0ms2mhi.jpg"
+                    class="pic" />
+            </div>
+            <!--左面图片 -->
+            <div class="out_left">
+                <img src="http://5b0988e595225.cdn.sohucs.com/images/20170714/4da404bb676f48379692bf7580c21175.jpeg"
+                    class="pic" />
+            </div>
+            <!--右面图片 -->
+            <div class="out_right">
+                <img src="http://img.zcool.cn/community/01d4b45548a4d60000019ae9071bf1.jpg" class="pic" />
+            </div>
+            <!--上面图片 -->
+            <div class="out_top">
+                <img src="http://uploads.5068.com/allimg/1712/151-1G214091220.jpg" class="pic" />
+            </div>
+            <!--下面图片 -->
+            <div class="out_bottom">
+                <img src="http://image1.xyzs.com/upload/ba/9c/114254/20130901/137797064013506_0.jpg" class="pic" />
+            </div>
+
+            <!--小正方体 -->
+            <span class="in_front">
+                <img src="http://www.005.tv/uploads/allimg/160906/7-160Z612451b20.jpg" class="in_pic" />
+            </span>
+            <span class="in_back">
+                <img src="http://www.chinaxiaokang.com/uploads/image/20161205/1480922036592450.jpg" class="in_pic" />
+            </span>
+            <span class="in_left">
+                <img src="http://www.people.com.cn/mediafile/pic/20161205/4/8567202682997042748.jpg" class="in_pic" />
+            </span>
+            <span class="in_right">
+                <img src="http://ww2.sinaimg.cn/large/6a018ae6gw1eon5z3yxwnj20zk0qotcb.jpg" class="in_pic" />
+            </span>
+            <span class="in_top">
+                <img src="http://img22.mtime.cn/up/2010/07/27/230618.38645884_o.jpg" class="in_pic" />
+            </span>
+            <span class="in_bottom">
+                <img src="http://p1.qhimg.com/t0158dfc7a4e3a16408.jpg" class="in_pic" />
+            </span>
+        </div>
+    </div>
+</body>
+
+</html>
