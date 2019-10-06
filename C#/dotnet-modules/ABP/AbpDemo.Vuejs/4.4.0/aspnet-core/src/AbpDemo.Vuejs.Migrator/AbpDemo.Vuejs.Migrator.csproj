@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+    <AssemblyName>AbpDemo.Vuejs.Migrator</AssemblyName>
+    <OutputType>Exe</OutputType>
+    <PackageId>AbpDemo.Vuejs.Migrator</PackageId>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Update="appsettings.json;log4net.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Abp.Castle.Log4Net" Version="4.1.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AbpDemo.Vuejs.Core\AbpDemo.Vuejs.Core.csproj" />
+    <ProjectReference Include="..\AbpDemo.Vuejs.EntityFrameworkCore\AbpDemo.Vuejs.EntityFrameworkCore.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,26 @@
+{
+  "apps": [
+    {
+      "name": "app1",
+      "script": "./index.js",
+      "watch": true,
+      "env": {
+        "NODE_ENV": "development",
+        "PORT": 3001
+      },
+      "exec_mode": "fork_mode",
+      "ignore_watch": ["logs"]
+    },
+    {
+      "name": "app2",
+      "script": "./index.js",
+      "watch": true,
+      "env": {
+        "NODE_ENV": "development",
+        "PORT": 3002
+      },
+      "exec_mode": "fork_mode",
+      "ignore_watch": ["logs"]
+    }
+  ]
+}

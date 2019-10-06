@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Note.md" />
+    <None Remove="Decorator\Component.config" />
+    <None Remove="._.DS_Store" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="SimpleFactory\" />
+    <Folder Include="Strategy\" />
+    <Folder Include="Decorator\" />
+    <Folder Include="Proxy\" />
+    <Folder Include="TemplateMethod\" />
+    <Folder Include="Facade\" />
+  </ItemGroup>
+</Project>

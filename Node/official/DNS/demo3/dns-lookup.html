@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>DNS查询工具</title>
+  <style type="text/css">
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    .res {
+      line-height: 24px;
+      color: #333;
+    }
+
+    .clearfix:after {
+      display: block;
+      content: '';
+      height: 0;
+      visibility: hidden;
+      clear: both;
+    }
+
+    .fl {
+      float: left;
+    }
+
+    .g-wrap {
+      display: flex;
+      width: 560px;
+      height: 40px;
+    }
+
+    .u-list {
+      position: relative;
+      flex: 1;
+    }
+
+    .u-inp {
+      flex: 3;
+      border: 1px solid #ccc;
+      border-left: none;
+      border-right: none;
+      padding: 11px 0 11px 10px;
+    }
+
+    .u-btn {
+      flex: 1;
+    }
+
+    .list {
+      display: none;
+      position: absolute;
+      left: 0px;
+      top: 40px;
+      width: 100%;
+      border: 1px solid #ccc;
+      border-top: none;
+      border-bottom: none;
+      box-sizing: content-box;
+    }
+
+    .item {
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      color: #666;
+      border-bottom: 1px solid #ccc;
+      cursor: pointer;
+    }
+
+    .item:hover {
+      color: #0087dc;
+    }
+
+    .u-list .type {
+      display: block;
+      width: 100%;
+      line-height: 38px;
+      border: 1px solid #ccc;
+      text-align: center;
+      color: #666;
+      text-decoration: none;
+    }
+
+    .u-list .type:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 0;
+      border: 8px solid transparent;
+      border-top-color: #ccc;
+      right: 4px;
+      top: 16px;
+    }
+
+    .u-inp input {
+      width: 100%;
+      border: none;
+      outline: none;
+      height: 18px;
+      line-height: 18px;
+      color: #666;
+      vertical-align: top;
+      font-size: 14px;
+    }
+
+    .u-btn .btn {
+      display: block;
+      line-height: 40px;
+      text-align: center;
+      background-color: #0087dc;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color .3s;
+    }
+
+    .u-btn .btn:hover {
+      background-color: #0060b2;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="res" class="res"></div>
+  <div class="g-wrap clearfix">
+    <div class="u-list fl">
+      <a href="javascript:;" class="type" id="type" data-value="A">IPV4</a>
+      <ul id="list" class="list">
+        <li class="item" data-value="A">IPV4</li>
+        <li class="item" data-value="AAAA">IPV6</li>
+        <li class="item" data-value="CNAME">CNAME</li>
+        <li class="item" data-value="SOA">SOA</li>
+      </ul>
+    </div>
+    <div class="u-inp fl">
+      <input type="text" class="host" id="host" placeholder="请输入域名">
+    </div>
+    <div class="u-btn fl">
+      <span class="btn" id="btn">查询</span>
+    </div>
+  </div>
+  <script>
+    function hide(el) {
+      el.style.display = 'none';
+    }
+
+    function show(el) {
+      el.style.display = 'block';
+    }
+
+    function dealResult(responseText) {
+      var ips = [],
+        result = '';
+      ips = JSON.parse(responseText).ips;
+      if (Array.isArray(ips)) {
+        result = ips.length > 0 ? ips.join('<br />') : '没有查询到结果';
+      } else if ({}.toString.call(ips) === '[object Object]') {
+        result = JSON.stringify(ips);
+      }
+      res.innerHTML = result;
+    }
+    type.addEventListener('click', function (e) {
+      e.stopPropagation();
+      show(list);
+    }, !1);
+    [].slice.call(document.body.querySelectorAll('.item')).forEach(function (el, idx, arr) {
+      el.addEventListener('click', function (e) {
+        type.innerText = this.innerText;
+        type.dataset.value = this.dataset.value;
+      }, !1);
+    });
+    document.body.addEventListener('click', function (e) {
+      if (list.style.display === 'block') {
+        hide(list);
+      }
+    }, !1);
+    btn.addEventListener('click', function (e) {
+      var hostname = host.value.trim(),
+        rrtype = type.dataset.value.toUpperCase();
+      if (hostname == '') return;
+      if (hostname.indexOf('http://') === 0) hostname = hostname.replace('http://', '');
+      var xhr = new XMLHttpRequest(),
+        method = "POST",
+        url = "/dnslookup";
+
+      xhr.open(method, url, true);
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+          dealResult(xhr.responseText);
+        }
+      };
+      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      xhr.send('host=' + hostname + '&rrtype=' + rrtype);
+    }, !1);
+  </script>
+</body>
+
+</html>

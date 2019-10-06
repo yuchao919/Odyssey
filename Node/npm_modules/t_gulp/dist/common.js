@@ -1,0 +1,1 @@
+function foo(o){console.log("hello "+o)}var hello="world";console.log(hello);
