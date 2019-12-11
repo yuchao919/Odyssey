@@ -21,8 +21,64 @@ Explanation: The answer is "wke", with the length of 3.
 			 Note that the answer must be a substring, "pwke" is a subsequence and not a substring.
 */
 #include <stdio.h>
+#include <string.h>
 
-int lengthOfLongestSubstring(char *s)
+int lengthOfLongestSubstring_me(char *s)
+{
+	if (s[0] == '\0')
+	{
+		return 0;
+	}
+	int x, y, cur, max;
+	x = y = cur = max = 0;
+	int dict[128] = {0};
+	while (s[y])
+	{
+		int idx = (int)s[y];
+		if (dict[idx] >= x)
+		{
+			cur = y + 1 - x;
+			if (cur > max)
+				max = cur;
+			x = dict[idx] + 1;
+		}
+		dict[idx] = y + 1;
+		y++;
+	}
+	cur = y - x + 1;
+	if (cur > max)
+		max = cur;
+	return max;
+}
+
+int lengthOfLongestSubstring_0ms(char *s)
+{
+	short last_char_pos_map[256], i;
+	int last_start = 0,
+		longest_length = 0,
+		len = strlen(s);
+	char c;
+
+	for (i = 0; i < 256; i++)
+		last_char_pos_map[i] = -1;
+
+	for (i = 0; i < len; i++)
+	{
+		c = s[i];
+		if (last_char_pos_map[c] >= last_start)
+		{
+			if (i - last_start > longest_length)
+				longest_length = i - last_start;
+			last_start = last_char_pos_map[c] + 1;
+		}
+		last_char_pos_map[c] = i;
+	}
+	if (i - last_start > longest_length)
+		longest_length = i - last_start;
+	return longest_length;
+}
+
+int lengthOfLongestSubstring_eg(char *s)
 {
 
 	int i = 0, j = 0, k = 0;
@@ -56,48 +112,22 @@ int lengthOfLongestSubstring(char *s)
 	return sub_str_len;
 }
 
-int lengthOfLongestSubstring_me(char *s)
-{
-	if (s[0] == '\0')
-	{
-		return 0;
-	}
-	int x, y, cur, max;
-	x = y = cur = max = 0;
-	int dict[128] = {0};
-	while (s[y])
-	{
-		int idx = (int)s[y];
-		if (dict[idx] >= x)
-		{
-			cur = y + 1 - x;
-			if (cur > max)
-				max = cur;
-			x = dict[idx] + 1;
-		}
-		dict[idx] = y + 1;
-		y++;
-	}
-	cur = y - x + 1;
-	if (cur > max)
-		max = cur;
-	return max;
-}
-
 int main(int argc, char **argv)
 {
-	char *egs[] = {"1234;;",
-								 "uaau",
-								 "au",
-								 "",
-								 "aa",
-								 "abcebadc",
-								 "abcabcbb",
-								 "bbbbb",
-								 "pwwkew"};
+	char *egs[] = {
+		"1234;;",
+		"uaau",
+		"au",
+		"",
+		"aa",
+		"abcebadc",
+		"abcabcbb",
+		"bbbbb",
+		"pwwkew"};
+
 	for (size_t i = 0, len = sizeof(egs) / sizeof(egs[0]); i < len; i++)
 	{
-		printf("%s : %d\n", egs[i], lengthOfLongestSubstring(egs[i]));
+		printf("%s : %d me: %d\n", egs[i], lengthOfLongestSubstring_eg(egs[i]), lengthOfLongestSubstring_me(egs[i]));
 	}
 
 	return 0;
