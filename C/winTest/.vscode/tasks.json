@@ -1,0 +1,24 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "gcc.exe build active file",
+            "command": "/c/Programs/MinGW/bin/gcc.exe",
+            "args": [
+                "-g",
+                "./main.c",
+                "-o",
+                "./main.exe"
+            ],
+           
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
