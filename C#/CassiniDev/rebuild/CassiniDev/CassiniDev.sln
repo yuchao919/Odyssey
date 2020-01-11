@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CassiniDev", "CassiniDev.cs
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CORSHeaderPlugin", "..\CORSHeaderPlugin\CORSHeaderPlugin.csproj", "{FFC0931A-4E3F-4A30-AA7A-33FD325DEB0B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebFormApp", "..\WebFormApp\WebFormApp.csproj", "{5F3F12D2-0D4F-4921-9052-DFFDE73D6528}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,14 @@ Global
 		{FFC0931A-4E3F-4A30-AA7A-33FD325DEB0B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FFC0931A-4E3F-4A30-AA7A-33FD325DEB0B}.Release|x86.ActiveCfg = Release|Any CPU
 		{FFC0931A-4E3F-4A30-AA7A-33FD325DEB0B}.Release|x86.Build.0 = Release|Any CPU
+		{5F3F12D2-0D4F-4921-9052-DFFDE73D6528}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F3F12D2-0D4F-4921-9052-DFFDE73D6528}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F3F12D2-0D4F-4921-9052-DFFDE73D6528}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5F3F12D2-0D4F-4921-9052-DFFDE73D6528}.Debug|x86.Build.0 = Debug|Any CPU
+		{5F3F12D2-0D4F-4921-9052-DFFDE73D6528}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F3F12D2-0D4F-4921-9052-DFFDE73D6528}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F3F12D2-0D4F-4921-9052-DFFDE73D6528}.Release|x86.ActiveCfg = Release|Any CPU
+		{5F3F12D2-0D4F-4921-9052-DFFDE73D6528}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
