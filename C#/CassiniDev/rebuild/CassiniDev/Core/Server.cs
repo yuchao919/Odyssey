@@ -309,7 +309,7 @@ namespace CassiniDev
 
         ///<summary>
         ///</summary>
-// ReSharper disable InconsistentNaming
+        // ReSharper disable InconsistentNaming
         public IPAddress IPAddress
         // ReSharper restore InconsistentNaming
         {
@@ -526,10 +526,10 @@ namespace CassiniDev
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="virtualPath"></param>
-        /// <param name="physicalPath"></param>
-        /// <param name="hostType"></param>
-        /// <param name="port"></param>
+        /// <param name="virtualPath">虚拟路径</param>
+        /// <param name="physicalPath">物理路径</param>
+        /// <param name="hostType">host类型</param>
+        /// <param name="port">端口号</param>
         /// <returns></returns>
         /// <remarks>
         /// This is Dmitry's hack to enable running outside of GAC.
@@ -537,10 +537,8 @@ namespace CassiniDev
         /// </remarks>
         private object CreateWorkerAppDomainWithHost(string virtualPath, string physicalPath, Type hostType, int port)
         {
-
-
             // create BuildManagerHost in the worker app domain
-            //ApplicationManager appManager = ApplicationManager.GetApplicationManager();
+            // ApplicationManager appManager = ApplicationManager.GetApplicationManager();
             Type buildManagerHostType = typeof(HttpRuntime).Assembly.GetType("System.Web.Compilation.BuildManagerHost");
             IRegisteredObject buildManagerHost = ApplicationManager.CreateObject(_appId, buildManagerHostType, virtualPath,
                                                                           physicalPath, false);
@@ -605,18 +603,20 @@ namespace CassiniDev
                     }
                 }
 #else
-
                 lock (_lockObject)
                 {
                     host = _host;
                     if (host == null)
                     {
+                        /**
+                         * 需要Host京果数字签名，并加入到GAC中，或者 将Host程序集复制到bin目录下，否则就会报找不到程序集的异常
+                         */
+                        //host = (Host)ApplicationHost.CreateApplicationHost(typeof(Host), _virtualPath, _physicalPath);
                         host = (Host)CreateWorkerAppDomainWithHost(_virtualPath, _physicalPath, typeof(Host), Port);
                         host.Configure(this, _port, _virtualPath, _physicalPath, _requireAuthentication, _disableDirectoryListing);
                         _host = host;
                     }
                 }
-
 #endif
             }
 

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-
 using System.Globalization;
 using System.IO;
 using System.Net;
@@ -18,8 +17,6 @@ namespace CassiniDev
         [STAThread, LoaderOptimization(LoaderOptimization.MultiDomainHost)]
         public static int Main(string[] cmdLine)
         {
-
-
             Server server = null;
 
             if (cmdLine != null && cmdLine.Length > 0)
@@ -36,19 +33,16 @@ namespace CassiniDev
                         // will display vs usage and return a code that VS understands
                         return ValidateForVS(cmdLine);
                     }
-
                     string usage = CommandLineParser.ArgumentsUsage(typeof(CommandLineArguments), 120);
                     ShowMessage(usage, MessageBoxIcon.Asterisk);
                     return 0;
                 }
-
 
                 if (args.RunMode == RunMode.Hostsfile)
                 {
                     SetHostsFile(args);
                     return 0;
                 }
-
 
                 // now we validate for us.
                 int returnValue = -1;
@@ -113,9 +107,7 @@ namespace CassiniDev
                     return -1;
                 }
 
-
                 server = new Server(args.Port, args.VirtualPath, args.ApplicationPath, IPAddress.Parse(args.IPAddress), args.HostName, args.Ntlm, args.Nodirlist);
-
 
                 if (args.AddHost)
                 {
@@ -135,7 +127,6 @@ namespace CassiniDev
                     }
                     return -4;
                 }
-
             }
 
             using (FormView form = new FormView(server))
@@ -183,7 +174,6 @@ namespace CassiniDev
                         SR.GetString(SR.WebdevUsagestr6) +
                         SR.GetString(SR.WebdevUsagestr7), MessageBoxIcon.Asterisk);
         }
-
 
         /// <summary>
         /// Keeping the VS validation to return codes that it likes.
@@ -293,7 +283,6 @@ namespace CassiniDev
             return 0;
         }
 
-
         private static void SetHostsFile(CommandLineArguments sargs)
         {
             try
@@ -316,9 +305,6 @@ namespace CassiniDev
                 Environment.Exit(-2);
             }
         }
-
-
-
     }
 
     //internal sealed class ServiceUtil

@@ -470,8 +470,6 @@ namespace CassiniDev
                     return;
                 }
 
-
-
                 PrepareResponse();
 
                 // Hand the processing over to HttpRuntime
