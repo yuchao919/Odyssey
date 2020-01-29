@@ -11,12 +11,18 @@ namespace WebFormApp
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             lblOutput.Text = txtInput.Text;
+        }
+
+        protected void btnClear_Click(object sender, EventArgs e)
+        {
+            txtInput.Text = null;
+            lblOutput.Text = null;
         }
     }
 }
