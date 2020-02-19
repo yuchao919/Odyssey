@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Web;
 using System.Web.Mvc;
 
 namespace WebMvcApp.Controllers
@@ -11,7 +8,7 @@ namespace WebMvcApp.Controllers
         // GET: Index
         public ActionResult Index()
         {
-            ViewBag.Info = "hello world";
+            ViewBag.ModulesInfo = string.Join("\n", HttpContext.ApplicationInstance.Modules.AllKeys);
             return View();
         }
     }

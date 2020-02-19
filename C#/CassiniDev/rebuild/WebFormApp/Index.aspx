@@ -16,11 +16,5 @@
         </div>
         <asp:Label ID="lblOutput" runat="server"></asp:Label>
     </form>
-    <%
-        for (int i = 0; i < 7; i++)
-        {
-            Response.Write(i);
-        }
-    %>
 </body>
 </html>

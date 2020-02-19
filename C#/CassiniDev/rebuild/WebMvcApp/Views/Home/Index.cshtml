@@ -11,7 +11,11 @@
 </head>
 <body>
     <div>
-        @{ Write(ViewBag.Info as String);}
+        @{
+            Response.Write("<br />/***************************************************/<br />");
+            Response.Write(string.Join("<br />", HttpContext.Current.ApplicationInstance.Modules.AllKeys));
+            Response.Write("<br />/***************************************************/<br />");
+        }
     </div>
 </body>
 </html>

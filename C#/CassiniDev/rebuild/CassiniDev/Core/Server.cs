@@ -465,44 +465,44 @@ namespace CassiniDev
             //DecrementRequestCount();
 
             ThreadPool.QueueUserWorkItem(delegate
+            {
+                while (!_shutdownInProgress)
                 {
-                    while (!_shutdownInProgress)
+                    try
                     {
-                        try
-                        {
-                            Socket acceptedSocket = _socket.Accept();
+                        Socket acceptedSocket = _socket.Accept();
 
-                            ThreadPool.QueueUserWorkItem(delegate
+                        ThreadPool.QueueUserWorkItem(delegate
+                            {
+                                if (!_shutdownInProgress)
                                 {
-                                    if (!_shutdownInProgress)
+                                    Connection conn = new Connection(this, acceptedSocket);
+
+                                    if (conn.WaitForRequestBytes() == 0)
                                     {
-                                        Connection conn = new Connection(this, acceptedSocket);
-
-                                        if (conn.WaitForRequestBytes() == 0)
-                                        {
-                                            conn.WriteErrorAndClose(400);
-                                            return;
-                                        }
-
-                                        Host host = GetHost();
-
-                                        if (host == null)
-                                        {
-                                            conn.WriteErrorAndClose(500);
-                                            return;
-                                        }
-
-                                        //IncrementRequestCount();
-                                        host.ProcessRequest(conn);
+                                        conn.WriteErrorAndClose(400);
+                                        return;
                                     }
-                                });
-                        }
-                        catch
-                        {
-                            Thread.Sleep(100);
-                        }
+
+                                    Host host = GetHost();
+
+                                    if (host == null)
+                                    {
+                                        conn.WriteErrorAndClose(500);
+                                        return;
+                                    }
+
+                                    //IncrementRequestCount();
+                                    host.ProcessRequest(conn);
+                                }
+                            });
                     }
-                });
+                    catch
+                    {
+                        Thread.Sleep(100);
+                    }
+                }
+            });
         }
 
 
