@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleTestcaseFactory.Demos.String
+namespace ConsoleTestcaseFactory.Demos
 {
     public partial class StringDemo
     {

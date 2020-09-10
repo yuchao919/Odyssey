@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ConsoleTestcaseFactory.Demos;
+using System;
 
 namespace ConsoleTestcaseFactory
 {
@@ -10,7 +7,14 @@ namespace ConsoleTestcaseFactory
     {
         static void Main(string[] args)
         {
-            Console.Read();
+            //ProgressBar.Run();
+            Console.WriteLine(0.1 + 0.2);
+            Console.WriteLine((0.1 + 0.2) == 0.3);
+            Console.WriteLine(Math.Round(4.475, 2));
+            Console.WriteLine(Math.Round(4.265, 2));
+            Console.WriteLine(Math.Round(4.266, 2));
+
+            Console.ReadKey();
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleTestcaseFactory.Demos.Switch
+namespace ConsoleTestcaseFactory.Demos
 {
     public class SwitchDemo
     {
