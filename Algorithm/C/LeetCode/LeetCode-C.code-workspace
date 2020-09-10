@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\cmd.exe",
+		"files.associations": {
+			"string.h": "c",
+			"stdio.h": "c",
+			"stdlib.h": "c",
+			"stdbool.h": "c"
+		}
+	}
+}
