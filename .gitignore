@@ -5,6 +5,7 @@ a.out
 package-lock.json
 Frontend/package-lock.json
 *.exe
+*.out
 
 # Build Folders (you can keep bin if you'd like, to store dlls and pdbs)
 [Bb]in/
