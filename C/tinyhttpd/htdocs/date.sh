@@ -1,4 +1,5 @@
 #!/bin/bash
+
 echo "Content-Type: text/html"
 echo
 echo "<HTML><BODY>"
@@ -8,3 +9,4 @@ date
 echo "</B></CENTER>"
 echo "</BODY></HTML>"
 
+exit 0

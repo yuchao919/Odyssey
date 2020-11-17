@@ -1,9 +1,0 @@
-{
-    "files.associations": {
-        "types.h": "c",
-        "stdlib.h": "c",
-        "ctype.h": "c",
-        "stdio.h": "c"
-    },
-    "C_Cpp.errorSquiggles": "Disabled"
-}
