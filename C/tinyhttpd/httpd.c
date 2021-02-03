@@ -492,7 +492,7 @@ void unimplemented(int client)
 int main(void)
 {
   int server_sock = -1;
-  u_short port = 54321;
+  u_short port = 51024;
   int client_sock = -1;
   struct sockaddr_in client_name;
   socklen_t client_name_len = sizeof(client_name);

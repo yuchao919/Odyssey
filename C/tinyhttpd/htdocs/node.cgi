@@ -1,4 +1,4 @@
-#!/home/leslie/.nvm/versions/node/v14.15.0/bin/node
+#!/home/leslie/.nvm/versions/node/v14.15.1/bin/node
 var msg = 'hello node'
 var html =
 `Content-Type: text/html
