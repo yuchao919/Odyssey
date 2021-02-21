@@ -12,6 +12,8 @@ var html =
 </head>
 <body>
   ${ msg }
+  </br>
+  DateTime : ${ new Date() }
 </body>
 </html>
 `
