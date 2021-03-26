@@ -40,7 +40,7 @@ int get_line(int, char *, int);
 void headers(int, const char *);
 void not_found(int);
 void serve_file(int, const char *);
-int startup(u_short *);
+int startup(unsigned short *);
 void unimplemented(int);
 
 /**********************************************************************/
@@ -117,8 +117,8 @@ void *accept_request(void *client_sock)
   }
   else
   {
-    if ((st.st_mode & S_IFMT) == S_IFDIR)
-      strcat(path, "/index.html");
+    // if ((st.st_mode & S_IFMT) == S_IFDIR)
+    //   strcat(path, "/index.html");
     if ((st.st_mode & S_IXUSR) ||
         (st.st_mode & S_IXGRP) ||
         (st.st_mode & S_IXOTH))
@@ -434,7 +434,7 @@ void serve_file(int client, const char *filename)
  * Parameters: pointer to variable containing the port to connect on
  * Returns: the socket */
 /**********************************************************************/
-int startup(u_short *port)
+int startup(unsigned short *port)
 {
   int httpd = 0;
   struct sockaddr_in name;
@@ -492,7 +492,7 @@ void unimplemented(int client)
 int main(void)
 {
   int server_sock = -1;
-  u_short port = 51024;
+  unsigned short port = 51024;
   int client_sock = -1;
   struct sockaddr_in client_name;
   socklen_t client_name_len = sizeof(client_name);
