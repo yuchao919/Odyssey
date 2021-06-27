@@ -1,35 +1,48 @@
 /*
-There are two sorted arrays nums1 and nums2 of size m and n respectively.
+Given two sorted arrays nums1 and nums2 of size m and n respectively, return the median of the two sorted arrays.
 
-Find the median of the two sorted arrays. The overall run time complexity should be O(log (m+n)).
-
-You may assume nums1 and nums2 cannot be both empty.
+The overall run time complexity should be O(log (m+n)).
 
 Example 1:
 
-nums1 = [1, 3]
-nums2 = [2]
-
-The median is 2.0
+Input: nums1 = [1,3], nums2 = [2]
+Output: 2.00000
+Explanation: merged array = [1,2,3] and median is 2.
 
 Example 2:
 
-nums1 = [1, 2]
-nums2 = [3, 4]
+Input: nums1 = [1,2], nums2 = [3,4]
+Output: 2.50000
+Explanation: merged array = [1,2,3,4] and median is (2 + 3) / 2 = 2.5.
 
-The median is (2 + 3)/2 = 2.5
+Example 3:
+
+Input: nums1 = [0,0], nums2 = [0,0]
+Output: 0.00000
+
+Example 4:
+
+Input: nums1 = [], nums2 = [1]
+Output: 1.00000
+
+Example 5:
+
+Input: nums1 = [2], nums2 = []
+Output: 2.00000
+
+Constraints:
+
+    nums1.length == m
+    nums2.length == n
+    0 <= m <= 1000
+    0 <= n <= 1000
+    1 <= m + n <= 2000
+    -10^6 <= nums1[i], nums2[i] <= 10^6
+
+
 */
 
-/*
-1,2 - 2 - 2 - 1
-3,4 - 2       0
-
-1 2 3 4 5 6 7 8
-
-1 6 7 8
-2 3 4 5 
-
-*/
+#include <stdio.h>
 
 double findMedianSortedArrays_answer(int *nums1, int nums1Size, int *nums2, int nums2Size)
 {
@@ -78,7 +91,7 @@ double findMedianSortedArrays_answer(int *nums1, int nums1Size, int *nums2, int 
 double findMedianSortedArrays_fastest(int *nums1, int nums1Size, int *nums2, int nums2Size)
 {
     int midSize = (nums1Size + nums2Size) / 2;
-    _Bool a = !((nums1Size + nums2Size) % 2);
+    _Bool a = !((nums1Size + nums2Size) % 2); // 偶数长度
     int i = 0;
     int j = 0;
 
@@ -187,56 +200,56 @@ void find(int *nums1, int *h1, int *t1, int *nums2, int *h2, int *t2)
     }
 }
 
-double findMedianSortedArrays_answer(int *nums1, int nums1Size, int *nums2, int nums2Size)
-{
-    int totalLength = nums1Size + nums2Size;
-    int i1 = 0;
-    int i2 = 0;
-    int isN1Empty = nums1Size == 0;
-    int isN2Empty = nums2Size == 0;
-    int curN;
-    int lastN;
-    int mid = totalLength / 2;
-    while (i1 + i2 <= mid)
-    {
-        if (i1 != 0 || i2 != 0)
-        {
-            lastN = curN;
-        }
+// double findMedianSortedArrays_answer(int *nums1, int nums1Size, int *nums2, int nums2Size)
+// {
+//     int totalLength = nums1Size + nums2Size;
+//     int i1 = 0;
+//     int i2 = 0;
+//     int isN1Empty = nums1Size == 0;
+//     int isN2Empty = nums2Size == 0;
+//     int curN;
+//     int lastN;
+//     int mid = totalLength / 2;
+//     while (i1 + i2 <= mid)
+//     {
+//         if (i1 != 0 || i2 != 0)
+//         {
+//             lastN = curN;
+//         }
 
-        int ele1 = i1 == nums1Size ? 0 : nums1[i1];
-        int ele2 = i2 == nums2Size ? 0 : nums2[i2];
+//         int ele1 = i1 == nums1Size ? 0 : nums1[i1];
+//         int ele2 = i2 == nums2Size ? 0 : nums2[i2];
 
-        if (isN1Empty || i1 == nums1Size)
-        {
-            curN = ele2;
-            i2++;
-        }
-        else if (isN2Empty || i2 == nums2Size)
-        {
-            curN = ele1;
-            i1++;
-        }
-        else if (ele1 < ele2)
-        {
-            curN = ele1;
-            i1++;
-        }
-        else
-        {
-            curN = ele2;
-            i2++;
-        }
-    }
-    return totalLength % 2 == 0 ? (curN + lastN) / 2.0 : curN;
-}
+//         if (isN1Empty || i1 == nums1Size)
+//         {
+//             curN = ele2;
+//             i2++;
+//         }
+//         else if (isN2Empty || i2 == nums2Size)
+//         {
+//             curN = ele1;
+//             i1++;
+//         }
+//         else if (ele1 < ele2)
+//         {
+//             curN = ele1;
+//             i1++;
+//         }
+//         else
+//         {
+//             curN = ele2;
+//             i2++;
+//         }
+//     }
+//     return totalLength % 2 == 0 ? (curN + lastN) / 2.0 : curN;
+// }
 
 int main(int argc, char **agrv)
 {
-    int n1[2] = {1, 2};
+    int n1[4] = {1, 2, 5, 6};
     int n2[2] = {3, 4};
 
-    printf("%f", findMedianSortedArrays_answer(n1, 2, n2, 2));
+    printf("%.2f\n", findMedianSortedArrays_fastest(n1, 4, n2, 2));
 
     return 0;
 }
