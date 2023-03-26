@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+            }
+            .container {
+                display: flex;
+                height: 300px;
+                column-gap: 12px;
+            }
+            .container .item {
+                height: 100%;
+                width: 100px;
+                background-color: coral;
+                flex: 0 0 auto;
+            }
+            .container .item.autofill {
+                flex: 1 1 auto;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="item"></div>
+            <div class="item autofill"></div>
+            <div class="item autofill"></div>
+        </div>
+        <br />
+        <div class="container" style="column-gap: 0">
+            <div class="item" style="flex-grow: 0; background-color: deepskyblue; padding: 5px; box-sizing: border-box">
+                这里有一大段文字！这里有一大段文字！这里有一大段文字！这里有一大段文字！这里有一大段文字！这里有一大段文字！这里有一大段文字！这里有一大段文字！这里有一大段文字！这里有一大段文字！这里有一大段文字！这里有一大段文字！这里有一大段文字！
+            </div>
+            <div class="item" style="flex-grow: 1; background-color: greenyellow"></div>
+            <div class="item" style="flex-grow: 2; background-color: salmon"></div>
+        </div>
+    </body>
+</html>
