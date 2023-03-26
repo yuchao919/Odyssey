@@ -1,25 +1,22 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29728.190
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTestcaseFactory", "ConsoleTestcaseFactory.csproj", "{46B3CEE5-7321-4F82-8D10-A67CEE4D50C0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTestcaseFactory", "ConsoleTestcaseFactory.csproj", "{A38177DD-0FE6-444E-8A43-0E46BABDEAAE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{46B3CEE5-7321-4F82-8D10-A67CEE4D50C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{46B3CEE5-7321-4F82-8D10-A67CEE4D50C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{46B3CEE5-7321-4F82-8D10-A67CEE4D50C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{46B3CEE5-7321-4F82-8D10-A67CEE4D50C0}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {3996E0B6-AFB7-4F2E-9FF8-E696E92F7EEF}
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A38177DD-0FE6-444E-8A43-0E46BABDEAAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A38177DD-0FE6-444E-8A43-0E46BABDEAAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A38177DD-0FE6-444E-8A43-0E46BABDEAAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A38177DD-0FE6-444E-8A43-0E46BABDEAAE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
