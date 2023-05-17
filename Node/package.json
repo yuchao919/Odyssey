@@ -21,7 +21,7 @@
     "log4js": "^2.3.4",
     "marked": "^0.3.18",
     "method-override": "^2.3.10",
-    "mongoose": "^4.11.12",
+    "mongoose": "^5.10.4",
     "mysql": "^2.14.1",
     "mysql2": "^1.4.2",
     "nan": "^2.6.2",
