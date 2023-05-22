@@ -42,11 +42,11 @@ void demo2()
     listNode.val = 100;
     listNode.ch = 'c';
 
-    //分别对各个变量使用sizeof运算
-    // printf("a=%d,b=%d,c=%d,d=%d,e=%d,f=%d,arr=%d,str=%d point_p=%d,point_i=%d,point_j=%d\n",
-    //        sizeof(a), sizeof(b), sizeof(c), sizeof(d), sizeof(e), sizeof(f),
-    //        sizeof(arr), sizeof(str), sizeof(p), sizeof(i), sizeof(j));
-    // a=4,b=1,c=2,d=8,e=4,f=8,arr=12,str=6 point_p=8,point_i=8,point_j=24
+    // 分别对各个变量使用sizeof运算
+    //  printf("a=%d,b=%d,c=%d,d=%d,e=%d,f=%d,arr=%d,str=%d point_p=%d,point_i=%d,point_j=%d\n",
+    //         sizeof(a), sizeof(b), sizeof(c), sizeof(d), sizeof(e), sizeof(f),
+    //         sizeof(arr), sizeof(str), sizeof(p), sizeof(i), sizeof(j));
+    //  a=4,b=1,c=2,d=8,e=4,f=8,arr=12,str=6 point_p=8,point_i=8,point_j=24
 
     printf("size of int a: %d\n", sizeof(a));
     printf("size of char b : %d\n", sizeof(b));
@@ -64,8 +64,8 @@ void demo2()
     printf("size of int * : %d\n", sizeof(int *));
     printf("\n");
     printf("size of struct ListNode listNode: %d \n", sizeof(listNode));
-    printf("size of struct ListNode: %d \n", sizeof(struct ListNode));
-    printf("size of struct ListNode *: %d \n", sizeof(struct ListNode *));
+    // printf("size of struct ListNode: %d \n", sizeof(struct ListNode));
+    // printf("size of struct ListNode *: %d \n", sizeof(struct ListNode *));
 
     printf("\n");
 

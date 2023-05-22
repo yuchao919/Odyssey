@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualBasic.CompilerServices;
+﻿using System.Linq;
+using Microsoft.VisualBasic.CompilerServices;
 using System.ComponentModel;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -68,9 +69,26 @@ namespace ConsoleTestcaseFactory
 
             // Console.Read();
 
-            var a = "asdasd,asdasd";
-            ConvertToList<Guid>(a);
+            // var a = "asdasd,asdasd";
+            // ConvertToList<Guid>(a);
+
+            // var a = Enumerable.Range(1, 12).ToList();
+            // System.Console.WriteLine(a.Count);
+            // List<int> a = null;
+
+            // Console.WriteLine(a.IsExistData());
+
+            List<(Guid, Guid)> list = new List<(Guid, Guid)>()
+            {
+                (Guid.Parse("08db3cbd-8a9e-4da8-8b17-712e14fdf72d"),Guid.Parse("08db3cbd-8a9e-4da8-8b17-712e14fdf72d")),
+                (Guid.Parse("08db3cbd-8a9e-4da8-8b17-712e14fdf72d"),Guid.Parse("08db3cbd-8a9e-4da8-8b17-712e14fdf72d"))
+            };
+            list = list.Distinct().ToList();
+
+            System.Console.WriteLine(list.Count);
+            ;
         }
+
 
         /// <summary>
         /// 把Guid字符串转为List对象
@@ -157,4 +175,20 @@ namespace ConsoleTestcaseFactory
     }
 
 
+    static class Utils
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public static bool IsExistData<TSource>(this IEnumerable<TSource> source)
+        {
+            if (source is null || !source.Any())
+            {
+                return false;
+            }
+            return true;
+        }
+    }
 }
