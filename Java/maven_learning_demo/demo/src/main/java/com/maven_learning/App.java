@@ -14,8 +14,9 @@ import java.util.concurrent.atomic.AtomicReference;
 import org.apache.commons.collections4.CollectionUtils;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.maven_learning.dto.ExportRowDataDTO;
+import com.maven_learning.dao.dto.ExportRowDataDTO;
 import com.maven_learning.extension.CollectionExtension;
+import com.maven_learning.extension.StringExtension;
 
 import lombok.experimental.ExtensionMethod;
 
@@ -24,10 +25,32 @@ import lombok.experimental.ExtensionMethod;
  *
  */
 
-@ExtensionMethod(CollectionExtension.class)
+@ExtensionMethod({ CollectionExtension.class, StringExtension.class })
 public class App {
     public static void main(String[] args) {
-        getAnatationDemo();
+        Object obj = null;
+
+        Integer a = Objects.toString(obj, null).asInt();
+
+        System.out.println(a);
+
+    }
+
+    public static void parseDemo() {
+
+        List<String> list = new ArrayList<>(Arrays.asList(
+                null,
+                "",
+                "1",
+                "1234.56",
+                "a123"));
+
+        List<Integer> numList = new ArrayList<>();
+
+        for (String s : list) {
+            numList.add(s.asInt());
+        }
+
     }
 
     public static void getAnatationDemo() {
@@ -38,6 +61,19 @@ public class App {
         // fields.removeIf(x -> true);
 
         System.out.println(fields.size());
+
+    }
+
+    public static void stringBuilderDemo() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("参数序列化成功");
+
+        System.out.println(sb.toString());
+
+        sb.append("请求结果成功 \n");
+
+        System.out.println(sb.toString());
     }
 
     public static void listDemo() {

@@ -1,4 +1,4 @@
-package com.maven_learning.dto;
+package com.maven_learning.dao.dto;
 
 import java.io.Serializable;
 
