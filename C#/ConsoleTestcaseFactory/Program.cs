@@ -78,14 +78,18 @@ namespace ConsoleTestcaseFactory
 
             // Console.WriteLine(a.IsExistData());
 
-            List<(Guid, Guid)> list = new List<(Guid, Guid)>()
-            {
-                (Guid.Parse("08db3cbd-8a9e-4da8-8b17-712e14fdf72d"),Guid.Parse("08db3cbd-8a9e-4da8-8b17-712e14fdf72d")),
-                (Guid.Parse("08db3cbd-8a9e-4da8-8b17-712e14fdf72d"),Guid.Parse("08db3cbd-8a9e-4da8-8b17-712e14fdf72d"))
-            };
-            list = list.Distinct().ToList();
+            // List<(Guid, Guid)> list = new List<(Guid, Guid)>()
+            // {
+            //     (Guid.Parse("08db3cbd-8a9e-4da8-8b17-712e14fdf72d"),Guid.Parse("08db3cbd-8a9e-4da8-8b17-712e14fdf72d")),
+            //     (Guid.Parse("08db3cbd-8a9e-4da8-8b17-712e14fdf72d"),Guid.Parse("08db3cbd-8a9e-4da8-8b17-712e14fdf72d"))
+            // };
+            // list = list.Distinct().ToList();
 
-            System.Console.WriteLine(list.Count);
+            // System.Console.WriteLine(list.Count);
+            // ;
+
+            BaseClass b = new DerivedClass();
+            b.Print();
             ;
         }
 
@@ -172,6 +176,24 @@ namespace ConsoleTestcaseFactory
         ///  
         /// </summary>
         public virtual List<int> NumList { get; set; } = new List<int>();
+    }
+
+    public class BaseClass
+    {
+
+        public void Print()
+        {
+            System.Console.WriteLine("This is BaseClass Print.\n");
+        }
+    }
+
+    public class DerivedClass : BaseClass
+    {
+
+        public void Print()
+        {
+            System.Console.WriteLine("This is DerivedClass Print.\n");
+        }
     }
 
 
