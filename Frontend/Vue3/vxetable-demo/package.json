@@ -1,0 +1,23 @@
+{
+  "name": "vxetable-demo",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "vue": "^3.3.4",
+    "vxe-table": "^4.5.12",
+    "xe-utils": "^3.5.13"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.3.4",
+    "consola": "^3.2.3",
+    "sass": "^1.68.0",
+    "vite": "^4.4.9",
+    "vite-plugin-style-import": "^2.0.0"
+  }
+}
