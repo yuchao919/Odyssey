@@ -1,8 +1,13 @@
 const express = require("express");
 const cors = require("cors");
+const db = require("./models");
+db.sequelize.sync({ force: true }).then(() => {
+    console.log("Synced db.");
+}).catch((err) => {
+    console.log("Failed to sync db: " + err.message);
+});
 
 const app = express();
-
 const corsOptions = {
     origin: "http://localhost:8081"
 };
@@ -15,20 +20,12 @@ app.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
-// const db = require("./server/models");
-// db.sequelize.sync({ force: true }).then(() => {
-//     console.log("Synced db.");
-// }).catch((err) => {
-//     console.log("Failed to sync db: " + err.message);
-// });
-
-
 // simple route
 app.get("/", (req, res) => {
     res.json({ message: "Welcome to application." });
 });
 
-// require("./app/routes/turorial.routes")(app);
+require("./routes/turorial.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 58080;
