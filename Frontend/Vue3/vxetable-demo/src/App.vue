@@ -48,7 +48,7 @@ const findList = () => {
 };
 
 const searchEvent = _.debounce((e) => {
-  if (!e || !e.$event || !e.$event.code) {
+  if (!e || !e.$event || e.$event.code !== 'Enter') {
     return;
   }
   tablePage.currentPage = 1;
