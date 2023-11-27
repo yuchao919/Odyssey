@@ -12,10 +12,7 @@ namespace ConsoleTestcaseFactory
     {
         static void Main(string[] args)
         {
-            // DecimalDemo.CellingDemo();
-            // DecimalDemo.ToStringDemo();
-
-            BaseDerivedDemo.Bcdc();
+            ExceptionDemo.ExceptionTest();
         }
     }
 }
