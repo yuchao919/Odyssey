@@ -5,11 +5,11 @@ import _ from "lodash";
 
 const xGrid = ref();
 const formData = reactive({
-    name: ''
+    searchName: ''
 });
 
 // 模拟分页接口
-const findPageList = ({ name, currentPage, pageSize }) => {
+const findPageList = ({ searchName, currentPage, pageSize }) => {
     return new Promise(resolve => {
         setTimeout(() => {
             const data = [
@@ -28,8 +28,8 @@ const findPageList = ({ name, currentPage, pageSize }) => {
                 { id: 100013, name: 'Test13', nickname: 'T13', role: 'Test', sex: 'Women', age: 22, address: 'Shenzhen' }
             ];
             let list = data;
-            if (!!name) {
-                list = list.filter(x => x.name.indexOf(name) > 0);
+            if (!!searchName) {
+                list = list.filter(x => x.name.indexOf(searchName) > -1);
             }
 
             resolve({
@@ -64,7 +64,7 @@ const gridOptions = reactive({
     },
     columns: [
         { type: 'seq', width: 60 },
-        { type: 'checkbox', width: 50 },
+        // { type: 'checkbox', width: 50 },
         { field: 'name', title: 'Name' },
         { field: 'nickname', title: 'Nickname' },
         { field: 'role', title: 'Role' },
@@ -96,6 +96,7 @@ const searchEvent = () => {
     }
 };
 const resetEvent = () => {
+    formData.searchName = "";
     const $grid = xGrid.value;
     if ($grid) {
         $grid.commitProxy('reload');
@@ -151,7 +152,7 @@ const handlePageChange = ({ currentPage, pageSize }) => {
                 <VxeForm :data="formData" @submit="searchEvent" @reset="resetEvent">
                     <VxeFormItem field="name">
                         <template #default>
-                            <VxeInput v-model="formData.name" type="text" placeholder="请输入名称"></VxeInput>
+                            <VxeInput v-model="formData.searchName" type="text" placeholder="请输入名称"></VxeInput>
                         </template>
                     </VxeFormItem>
                     <VxeFormItem>
