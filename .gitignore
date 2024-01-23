@@ -140,3 +140,5 @@ src/.vs/config/applicationhost.config
 /tools
 nupkg/push-hikalkan.bat
 ignore
+
+*.class

@@ -12,7 +12,7 @@ namespace ConsoleTestcaseFactory
     {
         static void Main(string[] args)
         {
-            ExceptionDemo.ExceptionTest();
+            DecimalDemo.ZeroPointOne();
         }
     }
 }

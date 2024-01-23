@@ -55,4 +55,14 @@ public class DecimalDemo
         System.Console.WriteLine(sum);
     }
 
+
+    public static void ZeroPointOne()
+    {
+        decimal x = 1.0M / 10;
+        decimal y = 1 - 9.0M / 10;
+        System.Console.WriteLine(x); // 0.1
+        System.Console.WriteLine(y); // 0.1
+        System.Console.WriteLine(x == y); // true
+    }
+
 }
