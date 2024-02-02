@@ -14,4 +14,12 @@ public static class ListDemo
 
         Console.WriteLine(list.Count);
     }
+
+
+    public static void StringSort()
+    {
+        List<string> cityList = new List<string>() { "北京", "上海", "广州", "深圳", "武汉" };
+
+        cityList.OrderBy(x => x).ToList().ForEach(Console.WriteLine);
+    }
 }
