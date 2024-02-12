@@ -1,9 +1,9 @@
-import demos.ArrayListDemo;
 
 public class Program {
     public static void main(String[] args) {
-        ArrayListDemo.pinyinSort();
+        long epoch = System.currentTimeMillis();
 
-        ;
+        System.out.println(epoch);
+
     }
 }
