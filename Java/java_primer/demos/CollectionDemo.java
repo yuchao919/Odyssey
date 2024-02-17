@@ -23,6 +23,5 @@ public class CollectionDemo {
     public static void createDemo() {
         List<String> list1 = Collections.emptyList();
 
-        Map<String, Integer> map1 = Collections.singletonMap(null, null);
     }
 }
