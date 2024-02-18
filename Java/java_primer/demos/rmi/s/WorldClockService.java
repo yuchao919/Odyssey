@@ -5,6 +5,7 @@ import java.time.ZoneId;
 public class WorldClockService implements WorldClock {
     @Override
     public LocalDateTime getLocalDateTime(String zoneId) throws RemoteException {
+        System.out.println("getLocalDateTime invoked!");
         return LocalDateTime.now(ZoneId.of(zoneId)).withNano(0);
     }
 }
