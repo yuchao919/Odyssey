@@ -1,9 +1,11 @@
+package demos.network;
+
 import java.io.*;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
-public class Client {
+public class TcpClient {
     public static void main(String[] args) throws IOException {
         Socket sock = new Socket("localhost", 6666); // 连接指定服务器和端口
         try (InputStream input = sock.getInputStream()) {

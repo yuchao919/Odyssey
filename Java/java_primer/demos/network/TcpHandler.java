@@ -1,11 +1,13 @@
+package demos.network;
+
 import java.io.*;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 
-class Handler extends Thread {
+class TcpHandler extends Thread {
     Socket sock;
 
-    public Handler(Socket sock) {
+    public TcpHandler(Socket sock) {
         this.sock = sock;
     }
 
