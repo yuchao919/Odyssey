@@ -1,7 +1,7 @@
-import demos.EncryptDecryptDemo;
+import demos.ThreadDemo;
 
 public class Program {
     public static void main(String[] args) throws Exception {
-        EncryptDecryptDemo.CBCEncryptDemo();
+        ThreadDemo.QueueDemo();
     }
 }
