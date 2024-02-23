@@ -72,6 +72,7 @@ public class TimestampDemo {
     // return strTimeSpan;
     // }
 
+    @SuppressWarnings("unused")
     private static String decodeBase64Timestamp(String versionBase64Str) {
         byte[] bytes = Base64.getDecoder().decode(versionBase64Str);
         StringBuilder sb = new StringBuilder();

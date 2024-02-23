@@ -5,6 +5,7 @@ import java.util.Date;
 
 public class DateDemo {
 
+    @SuppressWarnings("deprecation")
     public static void funcDemo() {
         Date date = new Date();
         System.out.println(date.getYear() + 1900); // 必须加上1900

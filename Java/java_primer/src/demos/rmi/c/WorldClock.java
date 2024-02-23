@@ -1,3 +1,5 @@
+package demos.rmi.c;
+
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.time.LocalDateTime;

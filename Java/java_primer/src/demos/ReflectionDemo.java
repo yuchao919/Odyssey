@@ -14,6 +14,7 @@ public class ReflectionDemo {
         printClassInfo(int.class);
     }
 
+    @SuppressWarnings("rawtypes")
     static void printClassInfo(Class cls) {
         System.out.println("Class name: " + cls.getName());
         System.out.println("Simple name: " + cls.getSimpleName());
@@ -38,6 +39,7 @@ public class ReflectionDemo {
         }
     }
 
+    @SuppressWarnings("rawtypes")
     public static void printStudentFields() {
         try {
             Class stdClass = Student.class;
