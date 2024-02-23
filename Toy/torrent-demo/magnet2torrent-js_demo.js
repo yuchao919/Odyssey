@@ -24,4 +24,4 @@ m2t.getTorrent(magnet).then(torrent => {
 }).catch(e => {
   // Timeout or error occured
   console.error(e);
-});
+}); 
