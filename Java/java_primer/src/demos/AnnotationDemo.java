@@ -4,7 +4,6 @@ import java.lang.reflect.Field;
 
 import annotations.ActionRight;
 import annotations.Range;
-import models.Person;
 import models.PersonRange;
 
 public class AnnotationDemo {

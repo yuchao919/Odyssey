@@ -17,7 +17,9 @@ public class UdpServer {
                 ds.receive(packet); // 收取一个UDP数据包
                 // 收取到的数据存储在buffer中，由packet.getOffset(), packet.getLength()指定起始位置和长度
                 // 将其按UTF-8编码转换为String:
-                String s = new String(packet.getData(), packet.getOffset(), packet.getLength(), StandardCharsets.UTF_8);
+                // String s =
+                // new String(packet.getData(), packet.getOffset(), packet.getLength(),
+                // StandardCharsets.UTF_8);
                 // 发送数据:
                 byte[] data = "ACK".getBytes(StandardCharsets.UTF_8);
                 packet.setData(data);

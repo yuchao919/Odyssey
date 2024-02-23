@@ -1,10 +1,8 @@
 package demos;
 
-import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.GeneralSecurityException;
 import java.security.SecureRandom;
-import java.security.Security;
 import java.util.Base64;
 
 import javax.crypto.Cipher;

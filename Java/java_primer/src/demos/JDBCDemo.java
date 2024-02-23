@@ -16,7 +16,6 @@ public class JDBCDemo {
         if (conn.isValid(5000)) {
             System.out.println("连接成功！");
         }
-        // TODO: 访问数据库...
         // 关闭连接:
         conn.close();
     }

@@ -22,6 +22,7 @@ public class CollectionDemo {
 
     public static void createDemo() {
         List<String> list1 = Collections.emptyList();
+        System.out.println(list1.size());
 
     }
 }

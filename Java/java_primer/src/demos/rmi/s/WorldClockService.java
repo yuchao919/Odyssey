@@ -1,3 +1,5 @@
+package demos.rmi.s;
+
 import java.rmi.RemoteException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;

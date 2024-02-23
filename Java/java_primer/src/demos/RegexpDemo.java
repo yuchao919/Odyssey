@@ -32,7 +32,8 @@ public class RegexpDemo {
             String whole = matcher.group(0);
             String area = matcher.group(1);
             String tel = matcher.group(2);
-
+            
+            System.out.println(whole);
             System.out.println(area);
             System.out.println(tel);
         }
