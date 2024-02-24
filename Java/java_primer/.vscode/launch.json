@@ -9,7 +9,6 @@
             "name": "Main",
             "request": "launch",
             "mainClass": "Main",
-            "projectName": "java_primer_6c4bca00"
         },
         {
             "type": "java",

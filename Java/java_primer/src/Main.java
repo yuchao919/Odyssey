@@ -1,7 +1,7 @@
-import demos.JDBCDemo;
+import demos.StreamDemo;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        JDBCDemo.search();
+        StreamDemo.toArrayDemo();
     }
 }
