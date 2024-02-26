@@ -1,7 +1,7 @@
-import demos.StreamDemo;
+import demos.SuperSimpleHttpServer;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        StreamDemo.toArrayDemo();
+        SuperSimpleHttpServer.start(53333);
     }
 }
