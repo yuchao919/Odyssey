@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.itranswarp.learnjava.AppTest" time="0.009" tests="1" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="17"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="GBK"/>
+    <property name="java.class.path" value="d:\Codes\Java\TomcatSelfHost\web-servlet-embedded\target\test-classes;d:\Codes\Java\TomcatSelfHost\web-servlet-embedded\target\classes;C:\Users\Cyberpunk\.m2\repository\org\apache\tomcat\embed\tomcat-embed-core\10.1.1\tomcat-embed-core-10.1.1.jar;C:\Users\Cyberpunk\.m2\repository\org\apache\tomcat\tomcat-annotations-api\10.1.1\tomcat-annotations-api-10.1.1.jar;C:\Users\Cyberpunk\.m2\repository\org\apache\tomcat\embed\tomcat-embed-jasper\10.1.1\tomcat-embed-jasper-10.1.1.jar;C:\Users\Cyberpunk\.m2\repository\org\apache\tomcat\embed\tomcat-embed-el\10.1.1\tomcat-embed-el-10.1.1.jar;C:\Users\Cyberpunk\.m2\repository\org\eclipse\jdt\ecj\3.18.0\ecj-3.18.0.jar;C:\Users\Cyberpunk\.m2\repository\junit\junit\3.8.1\junit-3.8.1.jar;"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="user.timezone" value="Asia/Shanghai"/>
+    <property name="os.name" value="Windows 11"/>
+    <property name="java.vm.specification.version" value="17"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="CN"/>
+    <property name="sun.boot.library.path" value="C:\Users\Cyberpunk\scoop\apps\openjdk17\current\bin"/>
+    <property name="sun.java.command" value="C:\Users\Cyberpunk\AppData\Local\Temp\surefire3359082194200057062\surefirebooter-20240228205557911_3.jar C:\Users\Cyberpunk\AppData\Local\Temp\surefire3359082194200057062 2024-02-28T20-55-56_069-jvmRun1 surefire-20240228205557911_1tmp surefire_0-20240228205557911_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="d:\Codes\Java\TomcatSelfHost\web-servlet-embedded\target\test-classes;d:\Codes\Java\TomcatSelfHost\web-servlet-embedded\target\classes;C:\Users\Cyberpunk\.m2\repository\org\apache\tomcat\embed\tomcat-embed-core\10.1.1\tomcat-embed-core-10.1.1.jar;C:\Users\Cyberpunk\.m2\repository\org\apache\tomcat\tomcat-annotations-api\10.1.1\tomcat-annotations-api-10.1.1.jar;C:\Users\Cyberpunk\.m2\repository\org\apache\tomcat\embed\tomcat-embed-jasper\10.1.1\tomcat-embed-jasper-10.1.1.jar;C:\Users\Cyberpunk\.m2\repository\org\apache\tomcat\embed\tomcat-embed-el\10.1.1\tomcat-embed-el-10.1.1.jar;C:\Users\Cyberpunk\.m2\repository\org\eclipse\jdt\ecj\3.18.0\ecj-3.18.0.jar;C:\Users\Cyberpunk\.m2\repository\junit\junit\3.8.1\junit-3.8.1.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\Cyberpunk"/>
+    <property name="user.language" value="zh"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2022-01-18"/>
+    <property name="java.home" value="C:\Users\Cyberpunk\scoop\apps\openjdk17\current"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="d:\Codes\Java\TomcatSelfHost\web-servlet-embedded"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="surefire.real.class.path" value="C:\Users\Cyberpunk\AppData\Local\Temp\surefire3359082194200057062\surefirebooter-20240228205557911_3.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="17.0.2+8-86"/>
+    <property name="user.name" value="Cyberpunk"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="GBK"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="localRepository" value="C:\Users\Cyberpunk\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="C:\Users\CYBERP~1\AppData\Local\Temp\"/>
+    <property name="java.version" value="17.0.2"/>
+    <property name="user.dir" value="d:\Codes\Java\TomcatSelfHost\web-servlet-embedded"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="native.encoding" value="GBK"/>
+    <property name="java.library.path" value="C:\Users\Cyberpunk\scoop\apps\openjdk17\current\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Users\Cyberpunk\scoop\apps\openjdk17\current\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Program Files\dotnet\;C:\Users\Cyberpunk\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Users\Cyberpunk\scoop\apps\maven\current\bin;C:\Users\Cyberpunk\scoop\apps\openjdk8-redhat\current\bin;C:\Users\Cyberpunk\scoop\shims;C:\Users\Cyberpunk\AppData\Local\Microsoft\WindowsApps;C:\Users\Cyberpunk\.dotnet\tools;C:\Users\Cyberpunk\AppData\Local\Programs\Fiddler;C:\Users\Cyberpunk\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Users\Cyberpunk\.dotnet\tools;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2023.1.2\bin;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2023.3.4\bin;."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="17.0.2+8-86"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="61.0"/>
+  </properties>
+  <testcase name="testApp" classname="com.itranswarp.learnjava.AppTest" time="0.001"/>
+</testsuite>
