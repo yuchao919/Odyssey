@@ -2,7 +2,7 @@ package com.nodechangedemo.models;
 
 public class StepCodeEnum {
 
-    public static final String Solution = "CgSolution";
+    public static final String CgSolution = "CgSolution";
 
     public static final String BidDoc = "BidDoc";
 

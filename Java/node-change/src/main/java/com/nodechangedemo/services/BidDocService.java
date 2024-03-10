@@ -7,22 +7,26 @@ import com.nodechangedemo.models.StepCodeEnum;
 
 public class BidDocService implements IFilingNode {
 
-    private FilingNodeService _nodeService = new FilingNodeService();
+    private FilingNodeService _nodeService;
 
     private static final String _stepCode = StepCodeEnum.BidDoc;
 
+    public void setNodeService(FilingNodeService service) {
+        this._nodeService = service;
+    }
+
     @Override
-    public void init(UUID cgSolutionGUID) {
-        System.out.println("BidFile 初始化");
+    public void init(UUID sid) {
+        System.out.println(sid + "招标文件：初始化");
     }
 
     public void audit(UUID sid) {
-        System.out.println("招标文件：" + sid + "审核通过");
+        System.out.println(sid + "招标文件：审核通过");
         _nodeService.finishNode(sid, _stepCode);
     }
 
     public void cancelAudit(UUID sid) {
-        System.out.println("招标文件：" + sid + "取消审核");
+        System.out.println(sid + "招标文件：取消审核");
         _nodeService.backToNode(sid, _stepCode);
     }
 }
