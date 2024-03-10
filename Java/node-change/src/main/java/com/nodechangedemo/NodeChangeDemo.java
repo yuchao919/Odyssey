@@ -19,7 +19,7 @@ public class NodeChangeDemo {
 
         _signContractService.finish(cs.CgSolutionGUID);
 
-        _signContractService.cancelAudit(cs.CgSolutionGUID);
+        // _signContractService.cancelAudit(cs.CgSolutionGUID);
 
         _signContractService.finish(cs.CgSolutionGUID);
 

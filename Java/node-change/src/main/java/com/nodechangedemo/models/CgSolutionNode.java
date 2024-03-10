@@ -10,9 +10,14 @@ public class CgSolutionNode {
 
     public UUID CgSolutionGUID;
 
-    public CgSolutionNode(String nodeCode, UUID sid) {
+    public Integer OrderNum;
+
+    public Integer GroupId;
+
+    public CgSolutionNode(String nodeCode, int orderNum, UUID sid) {
+        this.NodeState = NodeStateEnum.NotStart;
         this.NodeCode = nodeCode;
-        this.NodeState = 1;
-        CgSolutionGUID = sid;
+        this.OrderNum = orderNum;
+        this.CgSolutionGUID = sid;
     }
 }
