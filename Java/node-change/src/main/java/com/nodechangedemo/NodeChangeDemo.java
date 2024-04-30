@@ -4,7 +4,7 @@ import java.util.UUID;
 
 import com.nodechangedemo.models.CgSolution;
 import com.nodechangedemo.models.StepCodeEnum;
-import com.nodechangedemo.services.BidDocService;
+import com.nodechangedemo.services.BidDocAppService;
 import com.nodechangedemo.services.CgSolutionService;
 import com.nodechangedemo.services.FilingNodeService;
 import com.nodechangedemo.services.SignContractService;
@@ -15,21 +15,22 @@ public class NodeChangeDemo {
 
     private CgSolutionService _solutionService = new CgSolutionService();
 
-    private BidDocService _bidDocService = new BidDocService();
+    private BidDocAppService _bidDocService = new BidDocAppService();
 
     private SignContractService _signContractService = new SignContractService();
 
-    public void run() {
-
+    public NodeChangeDemo() {
         _solutionService.setNodeService(_nodeService);
         _bidDocService.setNodeService(_nodeService);
         _signContractService.setNodeService(_nodeService);
 
         _nodeService.addService(StepCodeEnum.BidDoc, _bidDocService);
         _nodeService.addService(StepCodeEnum.SignContract, _signContractService);
+    }
 
-    
-        back_test();
+    public void run() {
+
+        normal_test();
     }
 
     public void normal_test() {

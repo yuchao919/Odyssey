@@ -26,4 +26,8 @@ public class DateDemo {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         System.out.println(sdf.format(date));
     }
+
+    public static void compareDemo() {
+        
+    }
 }

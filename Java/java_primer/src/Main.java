@@ -1,7 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
 import demos.SuperSimpleHttpServer;
 
 public class Main {
@@ -13,5 +9,7 @@ public class Main {
         System.out.println(a == b);
         System.out.println(a.equals(b));
         System.out.println(list.contains(b));
+
+        System.out.println(System.getProperty("java.version"));
     }
 }
