@@ -1,15 +1,11 @@
-import demos.SuperSimpleHttpServer;
+import java.util.Objects;
+
+import demos.UtilsDemo;
 
 public class Main {
-    public static void main(String[] args) throws Exception {
-        List<UUID> list = new ArrayList<>();
-        UUID a = UUID.fromString("14b10b59-e690-4f43-90a6-a732b6e02a2a");
-        UUID b = UUID.fromString("14b10b59-e690-4f43-90a6-a732b6e02a2a");
-        list.add(a);
-        System.out.println(a == b);
-        System.out.println(a.equals(b));
-        System.out.println(list.contains(b));
 
-        System.out.println(System.getProperty("java.version"));
+    public static void main(String[] args) {
+
+       
     }
 }

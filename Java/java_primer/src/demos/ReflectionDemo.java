@@ -1,6 +1,7 @@
 package demos;
 
 import java.lang.reflect.Constructor;
+import java.util.Objects;
 
 import models.Student;
 
@@ -58,5 +59,20 @@ public class ReflectionDemo {
         Constructor<Integer> cons1 = Integer.class.getConstructor(int.class);
         Integer n1 = (Integer) cons1.newInstance(123);
         System.out.println(n1);
+    }
+
+    public static void getClazzDemo() {
+        try {
+            String className = "models.AAA";
+            Class<?> fc = Class.forName(className);
+            Class<?> lc = ClassLoader.getSystemClassLoader().loadClass(className);
+            Class<?> exceptionClass = (Class<?>) Class.class.getDeclaredMethod("forName", String.class).invoke(null,
+                    className);
+
+            System.out.println("fc ==  lc :" + Objects.equals(fc, lc));
+            System.out.println("fc ==  exceptionClass :" + Objects.equals(fc, exceptionClass));
+        } catch (Exception e) {
+
+        }
     }
 }

@@ -1,5 +1,6 @@
 package demos;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -63,5 +64,22 @@ public class FileStreamDemo {
 
         System.out.println(p1.toAbsolutePath().normalize());
 
+    }
+
+    public static byte[] convertInputStreamToByteArray(InputStream inputStream) throws IOException {
+        if (inputStream == null) {
+            throw new IllegalArgumentException("InputStream cannot be null");
+        }
+
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        byte[] buffer = new byte[1024];
+        int bytesRead;
+
+        // Read the InputStream into the ByteArrayOutputStream
+        while ((bytesRead = inputStream.read(buffer)) != -1) {
+            byteArrayOutputStream.write(buffer, 0, bytesRead);
+        }
+
+        return byteArrayOutputStream.toByteArray();
     }
 }
