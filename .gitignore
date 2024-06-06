@@ -142,4 +142,6 @@ src/.vs/config/applicationhost.config
 nupkg/push-hikalkan.bat
 ignore
 
+# Java
 *.class
+target/

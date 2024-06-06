@@ -9,7 +9,7 @@
             "name": "Launch App",
             "request": "launch",
             "mainClass": "com.example.App",
-            "projectName": "vscode-maven-starter",
+            "projectName": "app",
             "classPaths": [
                 "${workspaceFolder}/tool/target/classes",
                 "${workspaceFolder}/service/target/classes",
