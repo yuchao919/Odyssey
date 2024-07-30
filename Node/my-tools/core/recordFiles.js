@@ -71,6 +71,7 @@ module.exports = {
 
 
       for (const dir of dirList) {
+        console.log(`${dir} : ${new Date()} Begin`);
         await traverseDirectory(dir, async function recordFiles({ isDirectory, entry, folderName, folderPath, fullPath }) {
           const name = entry.name;
 
@@ -79,8 +80,8 @@ module.exports = {
           } else {
             fileList.push({ FileName: name, FolderName: folderName, FolderPath: folderPath, Path: fullPath });
           }
-
         });
+        console.log(`${dir} : ${new Date()} End`);
       }
 
       await RfFolder.bulkCreate(folderList);
