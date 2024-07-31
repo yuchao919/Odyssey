@@ -1,7 +1,7 @@
 {
   "name": "my-tools",
   "version": "1.0.0",
-  "main": "config.js",
+  "type": "module",
   "directories": {
     "doc": "docs"
   },

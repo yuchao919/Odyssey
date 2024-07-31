@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   version: "20240727002318",
   seqConfig: {
     dialect: "sqlite",
