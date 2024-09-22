@@ -1,0 +1,17 @@
+{
+  "name": "command_tool",
+  "version": "1.0.0",
+  "main": "./xxx.js",
+  "bin": {
+    "xxx": "./xxx.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "commander": "^12.1.0"
+  }
+}
