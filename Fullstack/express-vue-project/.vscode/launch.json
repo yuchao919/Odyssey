@@ -8,17 +8,20 @@
       "type": "node",
       "request": "launch",
       "name": "Launch server",
+      "program": "${workspaceFolder}/server/app.js",
       "skipFiles": [
         "<node_internals>/**"
       ],
-      "program": "${workspaceFolder}/server.js"
     },
     {
       "type": "chrome",
       "request": "launch",
-      "name": "Attach vue page",
-      "url": "http://localhost:58081",
-      "webRoot": "${workspaceFolder}"
+      "name": "Launch Chrome against localhost",
+      "url": "http://localhost:60800",
+      "webRoot": "${workspaceFolder}",
+      "runtimeArgs": [
+        "-incognito"
+      ]
     }
   ]
 }
