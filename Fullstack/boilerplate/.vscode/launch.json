@@ -1,0 +1,21 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  // How to set chrome profile: https://briandesousa1.wordpress.com/2018/05/12/using-a-chrome-developer-profile-with-visual-studio-code-debugger/
+  // 创建一个----profile-directory="tester" 的快捷方式，让后登录开发账号绑定它，在来设置launch.json
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Launch Chrome against localhost",
+      "url": "http://localhost:5173",
+      "webRoot": "${workspaceFolder}",
+      "userDataDir": false,
+      "runtimeArgs": [
+        "--profile-directory=tester",
+      ]
+    }
+  ]
+}

@@ -1,5 +1,0 @@
-# Created at 2024-02-28T20:55:57.949
-Boot Manifest-JAR contains absolute paths in classpath 'd:\Codes\Java\TomcatSelfHost\web-servlet-embedded\target\test-classes'
-Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
-'other' has different root
-
