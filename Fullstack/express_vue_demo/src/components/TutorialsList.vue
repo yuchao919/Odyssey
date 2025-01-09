@@ -45,7 +45,7 @@
         </div>
     </div>
 </template>
-  
+
 <script>
 import TutorialDataService from "../services/TutorialDataService";
 
@@ -110,7 +110,7 @@ export default {
     }
 };
 </script>
-  
+
 <style>
 .list {
     text-align: left;
