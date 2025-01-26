@@ -17,7 +17,7 @@ const tableData = ref([]);
 
 async function getUserInfo() {
   const res = await userService.getUserInfo();
-  tableData.value = res.data.data.list;
+  tableData.value = res.data.data;
 }
 
 onMounted(async () => {
