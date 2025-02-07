@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>single-item</title>
+  <style>
+    body {
+      background-color: #16161d;
+    }
+
+    select {}
+
+    .container {
+      margin-bottom: 30px;
+    }
+
+    .container p {
+      color: #eee;
+    }
+
+    .box {
+      display: flex;
+      width: 100px;
+      height: 100px;
+      background: #eee;
+    }
+
+    span.pip {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background-color: #16161d;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <div>
+      <label>justifyContent</label>
+      <select id="justifyContent" multiple style="height:200px; overflow: auto;">
+        <option value="center">center</option>
+        <option value="start">start</option>
+        <option value="end">end</option>
+        <option value="flex-start">flex-start</option>
+        <option value="flex-end">flex-end</option>
+        <option value="left">left</option>
+        <option value="right">right</option>
+        <option value="baseline">baseline</option>
+        <option value="first-baseline">first baseline</option>
+        <option value="last-baseline">last baseline</option>
+      </select>
+    </div>
+  </div>
+
+
+  <div class="container">
+    <div class="box one-face">
+      <span class="pip"></span>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="box two-face">
+      <span class="pip"></span>
+      <span class="pip"></span>
+    </div>
+  </div>
+
+  <div class="container">
+    <p>asdasd</p>
+    <div class="box three-face" style="justify-content: baseline;">
+      <span class="pip"></span>
+      <span class="pip"></span>
+      <span class="pip"></span>
+    </div>
+  </div>
+
+</body>
+
+</html>
