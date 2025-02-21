@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import GalleryGrid from './components/GalleryGrid.vue';
+import Gallery from './components/Gallery.vue';
 </script>
 
 <template>
-  <GalleryGrid></GalleryGrid>
+  <Gallery></Gallery>
 </template>
 
 <style scoped></style>
