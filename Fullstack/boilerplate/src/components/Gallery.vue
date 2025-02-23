@@ -1,7 +1,13 @@
 <template>
   <div class="page-wrapper">
     <div class="header">
-      <vxe-form ref="formRef" v-bind="formOptions" v-on="formEvents"></vxe-form>
+      <div>
+        <el-input v-model="searchKey" style="width:600px;">
+          <template #append>
+            <el-button :icon="Search" />
+          </template>
+        </el-input>
+      </div>
     </div>
     <div class="content">
       <vxe-grid ref="gridRef" v-bind="gridOptions" v-on="gridEvents"></vxe-grid>
@@ -13,6 +19,7 @@
 <script lang="ts" setup>
 import { ref, reactive, nextTick } from 'vue';
 import { type VxeGridInstance, type VxeGridProps, type VxeGridPropTypes, type VxeColumnPropTypes, type VxeGridListeners } from 'vxe-table';
+import { Search } from '@element-plus/icons-vue';
 import { type VxeFormItemPropTypes, type VxeSelectProps, type VxeFormProps, type VxeFormListeners, type VxeFormInstance } from 'vxe-pc-ui';
 import XEUtils from 'xe-utils';
 
@@ -21,9 +28,7 @@ interface RowVO {
   name: string;
 }
 
-interface FormDataVO {
-  searchKey: string;
-}
+let searchKey = ref('');
 
 const tableData: RowVO[] = [
   { id: 10001, name: 'Test1' },
@@ -36,37 +41,9 @@ const tableData: RowVO[] = [
   { id: 10008, name: 'Test8' }
 ];
 
-const formOptions = reactive<VxeFormProps<FormDataVO>>({
-  data: { searchKey: '' },
-  items: [
-    { field: 'searchKey', span: 8, itemRender: { name: 'VxeInput' } },
-    {
-      span: 8,
-      itemRender: {
-        name: 'VxeButtonGroup',
-        options: [
-          { type: 'submit', content: '搜索', status: 'primary' },
-          { type: 'reset', content: '重置' }
-        ]
-      }
-    }
-  ]
-});
-
-const formEvents: VxeFormListeners = {
-  submit() {
-    console.log('form submit');
-  },
-  reset() {
-    console.log('form reset');
-  }
-};
-
-
-const formRef = ref<VxeFormInstance<FormDataVO>>();
 const gridRef = ref<VxeGridInstance<RowVO>>();
 
-const loadMockData = (rSize: number, searchKey: string) => {
+const loadMockData = (rSize: number) => {
   return new Promise(resolve => {
     const data: RowVO[] = tableData.slice(0, rSize);
     resolve({
@@ -82,7 +59,7 @@ const gridOptions = reactive<VxeGridProps<RowVO> & { pagerConfig: VxeGridPropTyp
   stripe: true,
   showOverflow: true,
   showFooter: true,
-  height: '100%',
+  height: 'auto',
   columnConfig: {
     resizable: true,
   },
@@ -110,7 +87,7 @@ const gridOptions = reactive<VxeGridProps<RowVO> & { pagerConfig: VxeGridPropTyp
     },
     ajax: {
       query({ page }) {
-        return loadMockData(page.pageSize, "");
+        return loadMockData(page.pageSize);
       }
     }
   },
@@ -134,9 +111,17 @@ const gridEvents: VxeGridListeners = {
   background-color: bisque;
   display: flex;
   flex-direction: column;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
 .header {
-  flex: 1 100px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.content {
+  flex-grow: 1;
 }
 </style>
