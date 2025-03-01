@@ -2,9 +2,9 @@
   <div class="page-wrapper">
     <div class="header">
       <div>
-        <el-input v-model="searchKey" style="width:600px;">
+        <el-input v-model="searchKey" style="width:600px;" @keyup.enter="searchEvent" clearable>
           <template #append>
-            <el-button :icon="Search" />
+            <el-button :icon="Search" @click.stop.prevent="searchEvent" />
           </template>
         </el-input>
       </div>
@@ -18,42 +18,50 @@
 
 <script lang="ts" setup>
 import { ref, reactive, nextTick } from 'vue';
-import { type VxeGridInstance, type VxeGridProps, type VxeGridPropTypes, type VxeColumnPropTypes, type VxeGridListeners } from 'vxe-table';
+import type { VxeGridInstance, VxeGridProps, VxeGridPropTypes, VxeColumnPropTypes, VxeGridListeners } from 'vxe-table';
 import { Search } from '@element-plus/icons-vue';
-import { type VxeFormItemPropTypes, type VxeSelectProps, type VxeFormProps, type VxeFormListeners, type VxeFormInstance } from 'vxe-pc-ui';
-import XEUtils from 'xe-utils';
 
-interface RowVO {
-  id: number;
-  name: string;
-}
+import type UserInfo from '../models/UserInfo.ts';
+import * as userService from '../services/UserService.ts';
+
+
+const gridRef = ref<VxeGridInstance<UserInfo>>();
 
 let searchKey = ref('');
 
-const tableData: RowVO[] = [
-  { id: 10001, name: 'Test1' },
-  { id: 10002, name: 'Test2' },
-  { id: 10003, name: 'Test3' },
-  { id: 10004, name: 'Test4' },
-  { id: 10005, name: 'Test5' },
-  { id: 10006, name: 'Test6' },
-  { id: 10007, name: 'Test7' },
-  { id: 10008, name: 'Test8' }
-];
-
-const gridRef = ref<VxeGridInstance<RowVO>>();
-
-const loadMockData = (rSize: number) => {
-  return new Promise(resolve => {
-    const data: RowVO[] = tableData.slice(0, rSize);
-    resolve({
-      data,
-      total: data.length
-    });
-  });
+function searchEvent() {
+  gridRef.value?.commitProxy('query');
 };
 
-const gridOptions = reactive<VxeGridProps<RowVO> & { pagerConfig: VxeGridPropTypes.PagerConfig; }>({
+const tableData: UserInfo[] = [
+
+];
+
+const loadData = async (page: VxeGridPropTypes.ProxyAjaxQueryPageParams) => {
+  console.log(searchKey.value);
+  console.log(page);
+  const res: any = await userService.queryUsers();
+
+  const data: any = res.data;
+
+  return {
+    data,
+    total: data.length
+  };
+
+  // return new Promise(resolve => {
+  //   const start = (page.currentPage - 1) * page.pageSize;
+  //   const end = start + page.pageSize;
+  //   const data: UserInfo[] = tableData.slice(start, end);
+  //   resolve({
+  //     data,
+  //     total: tableData.length
+  //   });
+  // });
+};
+
+
+const gridOptions = reactive<VxeGridProps<UserInfo> & { pagerConfig: VxeGridPropTypes.PagerConfig; }>({
   border: true,
   loading: false,
   stripe: true,
@@ -74,23 +82,28 @@ const gridOptions = reactive<VxeGridProps<RowVO> & { pagerConfig: VxeGridPropTyp
   columns: [
     { field: 'seq', type: 'seq', width: 80 },
     { field: 'checkbox', type: 'checkbox', width: 80 },
-    { field: 'name', title: '名字', minWidth: 200, dragSort: true }
+    { field: 'id', title: 'id', width: 100 },
+    { field: 'name', title: '名称', width: 120, dragSort: true },
+    { field: 'age', title: '年龄', width: 80 },
+    { field: 'email', title: 'email', minWidth: 160 },
   ],
   pagerConfig: {
     pageSize: 100,
     pageSizes: [2, 20, 100, 500]
   },
   proxyConfig: {
+    seq: true,
     response: {
       result: 'data',
       total: 'total'
     },
     ajax: {
       query({ page }) {
-        return loadMockData(page.pageSize);
+        return loadData(page);
       }
     }
   },
+  footerData: []
 });
 
 const gridEvents: VxeGridListeners = {
@@ -98,6 +111,7 @@ const gridEvents: VxeGridListeners = {
     gridOptions.pagerConfig.pageSize = pageSize;
   },
   proxyQuery() {
+
   }
 };
 
