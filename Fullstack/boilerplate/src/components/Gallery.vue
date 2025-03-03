@@ -21,8 +21,8 @@ import { ref, reactive, nextTick } from 'vue';
 import type { VxeGridInstance, VxeGridProps, VxeGridPropTypes, VxeColumnPropTypes, VxeGridListeners } from 'vxe-table';
 import { Search } from '@element-plus/icons-vue';
 
-import type UserInfo from '../models/UserInfo.ts';
 import * as userService from '../services/UserService.ts';
+import { cellStarts } from 'element-plus/es/components/table/src/config.mjs';
 
 
 const gridRef = ref<VxeGridInstance<UserInfo>>();
@@ -33,20 +33,21 @@ function searchEvent() {
   gridRef.value?.commitProxy('query');
 };
 
-const tableData: UserInfo[] = [
-
-];
 
 const loadData = async (page: VxeGridPropTypes.ProxyAjaxQueryPageParams) => {
-  console.log(searchKey.value);
-  console.log(page);
-  const res: any = await userService.queryUsers();
+  const queryParam: QueryParam = {
+    pageSize: page.pageSize,
+    currentPage: page.currentPage,
+    searchKey: searchKey.value
+  };
+
+  const res: any = await userService.queryUsers(queryParam);
 
   const data: any = res.data;
 
   return {
-    data,
-    total: data.length
+    data: data.data,
+    total: data.total
   };
 
   // return new Promise(resolve => {
@@ -88,7 +89,7 @@ const gridOptions = reactive<VxeGridProps<UserInfo> & { pagerConfig: VxeGridProp
     { field: 'email', title: 'email', minWidth: 160 },
   ],
   pagerConfig: {
-    pageSize: 100,
+    pageSize: 20,
     pageSizes: [2, 20, 100, 500]
   },
   proxyConfig: {

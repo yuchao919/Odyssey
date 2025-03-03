@@ -11,7 +11,7 @@
       "request": "launch",
       "name": "Launch Chrome against localhost",
       "url": "http://localhost:5173",
-      "webRoot": "${workspaceFolder}/src",
+      "webRoot": "${workspaceFolder}",
       "userDataDir": false,
       "runtimeArgs": [
         "--profile-directory=tester",
