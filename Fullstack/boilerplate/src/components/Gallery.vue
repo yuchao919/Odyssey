@@ -10,27 +10,63 @@
       </div>
     </div>
     <div class="content">
-      <vxe-grid ref="gridRef" v-bind="gridOptions" v-on="gridEvents"></vxe-grid>
+      <vxe-grid ref="gridRef" v-bind="gridOptions" v-on="gridEvents">
+        <template #toolbarButtons>
+          <vxe-button status="primary" icon="vxe-icon-add" @click="addEvent">新增</vxe-button>
+        </template>
+        <template #action="{ row }">
+          <vxe-button mode="text" status="error" @click="saveEvent">保存</vxe-button>
+          <vxe-button mode="text" status="error" @click="delEvent">删除</vxe-button>
+        </template>
+      </vxe-grid>
     </div>
   </div>
 </template>
 
 
 <script lang="ts" setup>
-import { ref, reactive, nextTick } from 'vue';
-import type { VxeGridInstance, VxeGridProps, VxeGridPropTypes, VxeColumnPropTypes, VxeGridListeners } from 'vxe-table';
+import { ref, reactive } from 'vue';
+import type {
+  VxeGridInstance,
+  VxeGridProps,
+  VxeGridPropTypes,
+  VxeGridListeners
+} from 'vxe-table';
+import { VxeUI } from 'vxe-table';
 import { Search } from '@element-plus/icons-vue';
 
 import * as userService from '../services/UserService.ts';
-import { cellStarts } from 'element-plus/es/components/table/src/config.mjs';
+import { Row } from 'vxe-pc-ui';
 
+type RowVO = UserInfo;
 
-const gridRef = ref<VxeGridInstance<UserInfo>>();
+const gridRef = ref<VxeGridInstance<RowVO>>();
+
 
 let searchKey = ref('');
 
-function searchEvent() {
+const searchEvent = async () => {
   gridRef.value?.commitProxy('query');
+};
+
+const addEvent = async () => {
+  const $grid = gridRef.value;
+  if ($grid) {
+    const record = {};
+    const { row: newRow } = await $grid.insert(record);
+    $grid.setEditRow(newRow);
+  }
+};
+
+const delEvent = async () => {
+  VxeUI.modal.confirm({
+    title: '操作提示',
+    content: '请您确认是否删除？'
+  });
+};
+
+const saveEvent = async () => {
+
 };
 
 
@@ -41,28 +77,17 @@ const loadData = async (page: VxeGridPropTypes.ProxyAjaxQueryPageParams) => {
     searchKey: searchKey.value
   };
 
-  const res: any = await userService.queryUsers(queryParam);
-
-  const data: any = res.data;
+  const res = await userService.queryUsers(queryParam);
+  const data = res.data;
 
   return {
     data: data.data,
     total: data.total
   };
-
-  // return new Promise(resolve => {
-  //   const start = (page.currentPage - 1) * page.pageSize;
-  //   const end = start + page.pageSize;
-  //   const data: UserInfo[] = tableData.slice(start, end);
-  //   resolve({
-  //     data,
-  //     total: tableData.length
-  //   });
-  // });
 };
 
 
-const gridOptions = reactive<VxeGridProps<UserInfo> & { pagerConfig: VxeGridPropTypes.PagerConfig; }>({
+const gridOptions = reactive<VxeGridProps<RowVO> & { pagerConfig: VxeGridPropTypes.PagerConfig; }>({
   border: true,
   loading: false,
   stripe: true,
@@ -80,13 +105,19 @@ const gridOptions = reactive<VxeGridProps<UserInfo> & { pagerConfig: VxeGridProp
   rowConfig: {
     isHover: true
   },
+  toolbarConfig: {
+    slots: {
+      tools: 'toolbarButtons'
+    }
+  },
   columns: [
-    { field: 'seq', type: 'seq', width: 80 },
     { field: 'checkbox', type: 'checkbox', width: 80 },
-    { field: 'id', title: 'id', width: 100 },
+    { field: 'seq', type: 'seq', width: 80 },
+    { field: 'id', title: 'ID', width: 100 },
     { field: 'name', title: '名称', width: 120, dragSort: true },
     { field: 'age', title: '年龄', width: 80 },
     { field: 'email', title: 'email', minWidth: 160 },
+    { slots: { default: 'action' }, title: '操作', width: 120 }
   ],
   pagerConfig: {
     pageSize: 20,

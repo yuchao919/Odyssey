@@ -2,7 +2,7 @@ import Mock from 'mockjs';
 
 // 通过Mock生成模拟数据
 const userdata = Mock.mock({
-  'list|1000': [
+  'list|999': [
     {
       'id|+1': 10000,
       'name': '@cname',
@@ -15,21 +15,20 @@ const userdata = Mock.mock({
 export default [{
   url: '/mock/api/queryUsers',
   method: 'post',
-  response: (args: any) => {
-    const body: QueryParam = args.body;
+  response: ({ body }: any) => {
     const opt: QueryParam = Object.assign({
       currentPage: 1,
       pageSize: 20,
       searchKey: null
     }, body);
-    console.log(body);
 
     let data: UserInfo[] = userdata.list;
-    let total = data.length;
+
     if (opt.searchKey) {
       data = data.filter(x => x.name && x.name.includes(opt.searchKey));
-      total = data.length;
     }
+
+    let total = data.length;
 
     const start = (opt.currentPage - 1) * opt.pageSize;
     const end = start + opt.pageSize;
