@@ -13,8 +13,9 @@ export default defineConfig({
     vueDevTools(),
     // mock 数据的 dev环境
     viteMockServe({
+      enable: true,
       // supportTs: true, // 是否开启支持ts
-      mockPath: 'mocks', // 设置mockPath为根目录下的mock目录
+      mockPath: 'src/mocks', // 设置mockPath为根目录下的mock目录
       // localEnabled: true, // 设置是否监视mockPath对应的文件夹内文件中的更改
       // prodEnabled: false, // 设置是否启用生产环境的mock服务
       watchFiles: true, // 是否监视文件更改

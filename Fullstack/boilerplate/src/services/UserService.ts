@@ -4,6 +4,6 @@ export async function queryUsers(params: QueryParam): Promise<any> {
   return httpCommon({
     url: '/queryUsers',
     method: 'post',
-    params: params
+    data: params,
   });
 };

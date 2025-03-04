@@ -15,25 +15,30 @@ const userdata = Mock.mock({
 export default [{
   url: '/mock/api/queryUsers',
   method: 'post',
-  response: (params: QueryParam) => {
+  response: (args: any) => {
+    const body: QueryParam = args.body;
     const opt: QueryParam = Object.assign({
       currentPage: 1,
       pageSize: 20,
       searchKey: null
-    }, params);
-    let data: UserInfo[] = userdata.list;
+    }, body);
+    console.log(body);
 
+    let data: UserInfo[] = userdata.list;
+    let total = data.length;
     if (opt.searchKey) {
       data = data.filter(x => x.name && x.name.includes(opt.searchKey));
+      total = data.length;
     }
 
     const start = (opt.currentPage - 1) * opt.pageSize;
     const end = start + opt.pageSize;
-    data = data.slice(start, end);
+
+    let pageData = data.slice(start, end);
 
     return {
-      data: data,
-      total: data.length
+      data: pageData,
+      total: total
     };
   }
 }];
