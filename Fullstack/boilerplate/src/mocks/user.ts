@@ -1,4 +1,5 @@
 import Mock from 'mockjs';
+import type { MockMethod, MockConfig } from 'vite-plugin-mock';
 
 // 通过Mock生成模拟数据
 const userdata = Mock.mock({
@@ -12,10 +13,12 @@ const userdata = Mock.mock({
   ],
 });
 
+let idIncreasement: number = 10000 + userdata.list.length + 1;
+
 export default [{
   url: '/mock/api/queryUsers',
   method: 'post',
-  response: ({ body }: any) => {
+  response: ({ body }: { body: QueryParam; }) => {
     const opt: QueryParam = Object.assign({
       currentPage: 1,
       pageSize: 20,
@@ -40,4 +43,42 @@ export default [{
       total: total
     };
   }
-}];
+},
+{
+  url: '/mock/api/updateUser',
+  method: 'post',
+  response: ({ body }: { body: UserInfo; }) => {
+    // 新增数据
+    if (!body.id) {
+      const newUser: UserInfo = Object.assign({}, {
+        id: 0,
+        name: body.name,
+        age: body.age,
+        email: body.email
+      });
+
+      newUser.id = idIncreasement++;
+      userdata.list.push(newUser);
+      return newUser.id;
+    }
+    const data: UserInfo[] = userdata.list;
+    const user = data.find(x => x.id === body.id);
+    if (!user) {
+      return null;
+    }
+    user.name = body.name;
+    user.age = body.age;
+    user.email = body.email;
+
+    return user.id;
+  }
+},
+{
+  url: '/mock/api/deleteUsers',
+  method: 'post',
+  response: ({ body }: { body: number[]; }) => {
+    const data: UserInfo[] = userdata.list;
+    const deleteIds: number[] = body;
+    userdata.list = data.filter(x => !deleteIds.includes(x.id));
+  }
+}] as MockMethod[];

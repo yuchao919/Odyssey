@@ -15,8 +15,14 @@
           <vxe-button status="primary" icon="vxe-icon-add" @click="addEvent">新增</vxe-button>
         </template>
         <template #action="{ row }">
-          <vxe-button mode="text" status="error" @click="saveEvent">保存</vxe-button>
-          <vxe-button mode="text" status="error" @click="delEvent">删除</vxe-button>
+          <template v-if="hasEditStatus(row)">
+            <vxe-button @click="cancelRowEvent(row)">取消</vxe-button>
+            <vxe-button status="primary" @click="saveRowEvent(row)">保存</vxe-button>
+          </template>
+          <template v-else>
+            <vxe-button @click="editRowEvent(row)">编辑</vxe-button>
+            <vxe-button status="error" @click="delRowEvent(row)">删除</vxe-button>
+          </template>
         </template>
       </vxe-grid>
     </div>
@@ -30,13 +36,13 @@ import type {
   VxeGridInstance,
   VxeGridProps,
   VxeGridPropTypes,
-  VxeGridListeners
+  VxeGridListeners,
+  VxeTablePropTypes
 } from 'vxe-table';
 import { VxeUI } from 'vxe-table';
 import { Search } from '@element-plus/icons-vue';
 
 import * as userService from '../services/UserService.ts';
-import { Row } from 'vxe-pc-ui';
 
 type RowVO = UserInfo;
 
@@ -49,25 +55,96 @@ const searchEvent = async () => {
   gridRef.value?.commitProxy('query');
 };
 
+const isCanEdit = ($grid: VxeGridInstance) => {
+  const editingRecord = $grid.getEditRecord();
+  if (editingRecord) {
+    VxeUI.modal.message({ content: '请先保存编辑中的数据！', status: 'warning' });
+    return false;
+  }
+
+  return true;
+};
+
+const reload = async () => {
+  gridRef.value?.commitProxy('query');
+};
+
 const addEvent = async () => {
   const $grid = gridRef.value;
+  if (!$grid) {
+    return;
+  }
+
+  if (!isCanEdit($grid)) {
+    return;
+  }
+
+  const record = {};
+  const { row: newRow } = await $grid.insert(record);
+  $grid.setEditRow(newRow);
+};
+
+const hasEditStatus = (row: RowVO) => {
+  const $grid = gridRef.value;
   if ($grid) {
-    const record = {};
-    const { row: newRow } = await $grid.insert(record);
-    $grid.setEditRow(newRow);
+    return $grid.isEditByRow(row);
+  }
+  return false;
+};
+
+const saveRowEvent = async (row: RowVO) => {
+  const $grid = gridRef.value;
+  if (!$grid) {
+    return;
+  }
+  await $grid.clearEdit();
+
+  const result = await userService.updateUser(row);
+  VxeUI.modal.message({ content: 'success', status: 'success' });
+
+  await reload();
+
+  // // 重新加载行
+  // await $grid.reloadRow(row, {});
+};
+
+const cancelRowEvent = async (row: RowVO) => {
+  const $grid = gridRef.value;
+  if ($grid) {
+    await $grid.clearEdit();
+    // 新增的数据没有id，直接删除
+    if (!row.id) {
+      await $grid.remove(row);
+      return;
+    }
+
+    // 还原数据
+    await $grid.revertData(row);
   }
 };
 
-const delEvent = async () => {
-  VxeUI.modal.confirm({
+const editRowEvent = async (row: RowVO) => {
+  const $grid = gridRef.value;
+  if (!$grid) {
+    return;
+  } if (!isCanEdit($grid)) {
+    return;
+  }
+
+  await $grid.setEditRow(row);
+};
+
+const delRowEvent = async (row: RowVO) => {
+  const code = await VxeUI.modal.confirm({
     title: '操作提示',
     content: '请您确认是否删除？'
   });
+  if (code === 'confirm') {
+    await userService.deleteUsers([row.id]);
+    await reload();
+  }
 };
 
-const saveEvent = async () => {
-
-};
 
 
 const loadData = async (page: VxeGridPropTypes.ProxyAjaxQueryPageParams) => {
@@ -87,13 +164,20 @@ const loadData = async (page: VxeGridPropTypes.ProxyAjaxQueryPageParams) => {
 };
 
 
-const gridOptions = reactive<VxeGridProps<RowVO> & { pagerConfig: VxeGridPropTypes.PagerConfig; }>({
+const gridOptions = reactive<VxeGridProps<RowVO> & { pagerConfig: VxeGridPropTypes.PagerConfig; } & { editConfig: VxeTablePropTypes.EditConfig<RowVO>; }>({
   border: true,
   loading: false,
   stripe: true,
   showOverflow: true,
   showFooter: true,
   height: 'auto',
+  keepSource: true,
+  editConfig: {
+    trigger: 'manual',
+    mode: 'row',
+    autoClear: false,
+    showStatus: true
+  },
   columnConfig: {
     resizable: true,
   },
@@ -102,6 +186,7 @@ const gridOptions = reactive<VxeGridProps<RowVO> & { pagerConfig: VxeGridPropTyp
     showIcon: false,
     showGuidesStatus: true
   },
+
   rowConfig: {
     isHover: true
   },
@@ -114,10 +199,10 @@ const gridOptions = reactive<VxeGridProps<RowVO> & { pagerConfig: VxeGridPropTyp
     { field: 'checkbox', type: 'checkbox', width: 80 },
     { field: 'seq', type: 'seq', width: 80 },
     { field: 'id', title: 'ID', width: 100 },
-    { field: 'name', title: '名称', width: 120, dragSort: true },
-    { field: 'age', title: '年龄', width: 80 },
-    { field: 'email', title: 'email', minWidth: 160 },
-    { slots: { default: 'action' }, title: '操作', width: 120 }
+    { field: 'name', title: '名称', width: 120, editRender: { name: 'VxeInput' }, dragSort: true },
+    { field: 'age', title: '年龄', width: 80, editRender: { name: 'VxeInput' } },
+    { field: 'email', title: 'email', minWidth: 160, editRender: { name: 'VxeInput' } },
+    { slots: { default: 'action' }, title: '操作', width: 160 }
   ],
   pagerConfig: {
     pageSize: 20,
