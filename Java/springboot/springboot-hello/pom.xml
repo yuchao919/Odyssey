@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Maven POM文件头，定义XML版本和编码 -->
+<!-- 项目根标签，声明命名空间和XML Schema校验规则 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <!-- Maven模型版本，固定为4.0.0 -->
+  <modelVersion>4.0.0</modelVersion>
+  <!-- 项目坐标：组织标识 -->
+  <groupId>com.odyssey</groupId>
+  <!-- 项目唯一标识（模块名） -->
+  <artifactId>springboot-hello</artifactId>
+  <!-- 项目版本（SNAPSHOT表示开发中版本） -->
+  <version>1.0-SNAPSHOT</version>
+  <!-- 打包方式为可执行JAR -->
+  <packaging>jar</packaging>
+  <!-- 项目名称（可读性标识） -->
+  <name>springboot-hello</name>
+  <!-- 项目描述 -->
+  <description>Demo project for Spring Boot</description>
+
+  <!-- 自定义属性配置 -->
+  <properties>
+    <!-- 指定Java版本为1.8（与Spring Boot 2.x兼容） -->
+    <java.version>1.8</java.version>
+    <!-- 源码文件编码 -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <!-- 报告输出编码 -->
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <!-- **显式指定Spring Boot版本（此处使用2.7.18）** -->
+    <spring-boot.version>2.7.18</spring-boot.version>
+  </properties>
+
+  <!-- 项目依赖列表 -->
+  <dependencies>
+    <!-- Spring Boot Web Starter：包含Web开发基础依赖（Tomcat+Spring MVC） -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+      <!-- **未指定版本，由dependencyManagement统一管理** -->
+    </dependency>
+  </dependencies>
+
+  <!-- **依赖管理（替代继承父POM的方式）** -->
+  <dependencyManagement>
+    <dependencies>
+      <!-- 引入Spring Boot的BOM（Bill of Materials）管理依赖版本 -->
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <!-- 版本通过属性${spring-boot.version}动态指定 -->
+        <version>${spring-boot.version}</version>
+        <!-- 类型为pom，表示引入的是依赖管理清单 -->
+        <type>pom</type>
+        <!-- scope=import表示继承该BOM中的版本定义 -->
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+
+  <!-- 构建配置 -->
+  <build>
+    <plugins>
+      <!-- Maven编译插件 -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <!-- **显式指定插件版本（覆盖默认版本）** -->
+        <version>3.8.1</version>
+        <configuration>
+          <!-- 源码兼容性设置为Java 8 -->
+          <source>${java.version}</source>
+          <!-- 目标字节码版本设置为Java 8 -->
+          <target>${java.version}</target>
+          <!-- 编译编码 -->
+          <encoding>${project.build.sourceEncoding}</encoding>
+        </configuration>
+      </plugin>
+
+      <!-- Spring Boot Maven插件 -->
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <!-- 插件版本与Spring Boot版本一致 -->
+        <version>${spring-boot.version}</version>
+        <configuration>
+          <!-- **主类配置（需检查包路径是否正确！）** -->
+          <mainClass>com.odyssey</mainClass>
+          <!-- **跳过插件执行（true时不会打包可执行JAR）** -->
+          <skip>true</skip>
+        </configuration>
+        <executions>
+          <execution>
+            <!-- 执行ID -->
+            <id>repackage</id>
+            <goals>
+              <!-- 目标：重新打包生成可执行JAR -->
+              <goal>repackage</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
