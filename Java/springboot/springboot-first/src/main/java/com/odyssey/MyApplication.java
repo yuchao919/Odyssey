@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class MyApplication {
 
   // annotation provides “routing” information.
-  @RequestMapping("/")
+  @RequestMapping("/hi")
   String home() {
-    return "Hello World!";
+    return "hello world";
   }
 
   public static void main(String[] args) {

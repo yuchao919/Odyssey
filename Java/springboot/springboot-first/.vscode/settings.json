@@ -1,4 +1,3 @@
 {
-  "xml.java.home": "${env:USERPROFILE}\\scoop\\apps\\temurin-lts-jdk\\current",
   "java.compile.nullAnalysis.mode": "automatic",
 }
