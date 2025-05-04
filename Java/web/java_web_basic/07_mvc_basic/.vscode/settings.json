@@ -1,0 +1,18 @@
+{
+  "java.compile.nullAnalysis.mode": "automatic",
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "java.jdt.ls.java.home": "C:\\Users\\yuc05\\scoop\\apps\\openjdk17\\current",
+  "java.configuration.runtimes": [
+    {
+      "name": "JavaSE-17",
+      "default": true,
+      "path": "C:\\Users\\yuc05\\scoop\\apps\\openjdk17\\current"
+    }
+  ],
+  "maven.terminal.customEnv": [
+    {
+      "environmentVariable": "JAVA_HOME",
+      "value": "C:\\Users\\yuc05\\scoop\\apps\\openjdk17\\current"
+    }
+  ]
+}

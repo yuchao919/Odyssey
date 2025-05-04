@@ -1,0 +1,12 @@
+server:
+  port: 51888
+spring:
+  datasource:
+    driver-class-name: org.sqlite.JDBC
+    url: jdbc:sqlite:db/database.db
+
+# MyBatis-Plus 配置
+mybatis-plus:
+  type-aliases-package: com.example.demo.entity
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 打印SQL日
